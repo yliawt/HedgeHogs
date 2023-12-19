@@ -49,8 +49,8 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-          <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
-          <li class="active"><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li class="active"><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -76,7 +76,7 @@
       </div>
     </section><!-- End Breadcrumbs Section -->
 
-   
+
       <div class="container">
 
         <!-- ======= Portfolio Section ======= -->
@@ -84,12 +84,25 @@
 
 
           <div class="inner-page">
+         <div class="username">
+            <div class="mb-3">
+                <label for="username" class="form-label" >Username</label>
 
+
+                <select id="username" class="form-select" name="username" type="text" onchange="redirectToChatRoom(this)" required>
+                  <option>Sila Pilih Username untuk mesej</option>
+                  {% for user in username %}
+                <option>{{ user[0] }}</option>
+                {% endfor %}
+                </select>
+              </div>
+         </div>
               <div id="room-container">
                 <div class="col">
                   <div class="msg-room">
                     <div id="msgs-container">
                       <ul id="messages">
+                        {% if messages %}
                       {% for message in messages %}
                         <li class="message-item {% if message[0] == user %} self-message-item{% else %}peer-message-item{% endif %}">
                           <p>{{ message[1] }}</p>
@@ -98,6 +111,9 @@
                           </small>
                         </li>
                       {% endfor %}
+                        {% else %}
+            <li class="no-message-item" style="color:grey !important">No messages yet.</li>
+        {% endif %}
                       </ul>
                     </div>
                     <div id="message-box">
@@ -139,6 +155,12 @@
     integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA=="
     crossorigin="anonymous"
   ></script>
+  <script>
+  function redirectToChatRoom(selectElement) {
+      var selectedUsername = selectElement.value;
+      window.location.href = "/selectedChatBox?username=" + selectedUsername;
+  }
+  </script>
   <script type="text/javascript">
     var socketio = io();
 

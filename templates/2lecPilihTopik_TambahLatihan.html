@@ -47,19 +47,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1lecIndex.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2lecpilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -72,13 +72,7 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/2lecPilihTopik.html"><i class="bi bi-arrow-left"></i></a></li>
-          </ol>
-          <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li><a href="../templates/2lecPilihTopik.html">Tambah Latihan</a></li>
-            <li>Latihan Sedia Ada</li>
-            
+            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
           </ol>
         </div>
       </div>
@@ -87,32 +81,24 @@
     <section class="inner-page">
       <div class="container">
 
-
-
         <!-- ======= Activity Section ======= -->
         <section id="activity" class="portfolio">
-
-
-
           <div class="section-title" data-aos="fade-up">
             <h1>Bahan Pembelajaran</h1>
           </div>
 
-
           <div class="row" data-aos="fade-up" data-aos-delay="400">
-          <a href="{{url_for('exercise_form')}}">
-            <div class="activityBox viewLatihan">
-              <h5> <i class="bi-eye" style="padding: 10px;"></i>Tambah Latihan</h5>
-            </div>
-          </a>
-</div>
+            <a href="{{url_for('exercise_form')}}">
+              <div class="activityBox viewLatihan">
+                <h5> <i class="bi-eye" style="padding: 10px;"></i>Tambah Latihan</h5>
+              </div>
+            </a>
+          </div>
 
-<div class="row"data-aos="fade-up" data-aos-delay="800" style="padding: 10px;">
-
+          <div class="row"data-aos="fade-up" data-aos-delay="800" style="padding: 10px;">
             <table class="table table-hover">
               <thead>
                 <tr>
-                 
                   <th scope="col">Action</th>
                   <th scope="col">Topik</th>
                   <th scope="col">Jenis</th>
@@ -135,7 +121,7 @@
                 {% endfor %}
               </tbody>
             </table>
-
+          </div>
         </section><!-- End Activity Section -->
       </div>
     </section>
@@ -154,5 +140,4 @@
   <script src="../assets/js/main.js"></script>
 
 </body>
-
 </html>

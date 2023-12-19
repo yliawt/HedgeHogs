@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SMG Tambah Nota</title>
+  <title>Vesperr Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/logo.png" rel="icon">
+  <link href="../assets/img/favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -48,24 +48,26 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('mainpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
-          <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
     </div>
   </header><!-- End Header -->
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -73,9 +75,14 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
+            <li><a href="{{url_for('tingkatan3')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          
+          <ol>
+            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+            <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
+            <li>Latihan</li>
+          </ol>
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -83,53 +90,54 @@
     <section class="inner-page">
       <div class="container">
 
-        <!-- ======= Activity Section ======= -->
-        <section id="activity" class="portfolio">
-          <div class="section-title" data-aos="fade-up">
-            <h1>Bahan Pembelajaran</h1>
-          </div>
 
-          <div class="row" data-aos="fade-up" data-aos-delay="400">
-            <a href="{{url_for('note_form')}}">
-              <div class="activityBox viewNota">
-                <h5> <i class="bi-eye" style="padding: 10px;"></i>Tambah Nota</h5>
+        <!-- ======= Services Section ======= -->
+        <section id="services" class="services">
+          <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+              <h1>MATEMATIK PENGUNA I:<br>SIMPANAN DAN PELABURAN, KREDIT DAN HUTANG</h1>
+              <hr>
+
+            </div>
+
+            <div class="row">
+
+              <!-- Container 1 -->
+              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
+                <a href="{{url_for('tingkatan3_latihan_link')}}" style="text-decoration: none; color: inherit;">
+                  <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                    <h4 class="title">Contoh Latihan</h4>
+                    <p class="description">PDF dan Jawapan</p>
+                  </div>
+                </a>
               </div>
-            </a>
-          </div>
 
-          <div class="row"data-aos="fade-up" data-aos-delay="800" style="padding: 10px;">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Action</th>
-                  <th scope="col">Topik</th>
-                  <th scope="col">Jenis</th>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Tambahan</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in note %}
-                  <tr>
-                    <td>
-                      <a href="#"><button class="btn btn-danger">Delete</button></a>
-                      <a href="#"><button class="btn btn-warning">Modify</button></a>
-                    </td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td><a href="{{ url_for('download', filename=row[3]) }}" class="btn btn-primary" download>Download</a> </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+              <!-- Container 2 -->
+              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
+                <a href="{{url_for('tingkatan3_latihan_game')}}" style="text-decoration: none; color: inherit;">
+                  <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon"><i class="bx bx-file"></i></div>
+                    <h4 class="title">Permainan</h4>
+                    <p class="description">Memilih jawapan yang betul</p>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-        </section><!-- End Activity Section -->
+        </section><!-- End Services Section -->
+
+
+
       </div>
     </section>
 
   </main><!-- End #main -->
 
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
@@ -143,4 +151,5 @@
   <script src="../assets/js/main.js"></script>
 
 </body>
+
 </html>

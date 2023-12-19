@@ -40,43 +40,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <style>
-    .collapsible {
-      background-color: #777;
-      color: white;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
 
-
-    .content {
-      padding: 0 18px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-      background-color: #f1f1f1;
-      text-align: center;
-    }
-
-    @media screen and (min-width: 800px) {
-    .content iframe {
-        width: 664px;
-        height: 498px;
-    }
-    .video-container {
-                  max-width: 100%; /* Set the video's maximum width to 100% of the container width */
-                  height: auto; /* Allow the video's height to adjust automatically to maintain the aspect ratio */
-              }
-}
-
-  </style>
 </head>
 
 <body>
@@ -86,7 +50,7 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('mainpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>

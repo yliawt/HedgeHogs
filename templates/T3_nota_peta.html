@@ -44,25 +44,24 @@
 </head>
 
 <body>
-
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('mainpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,13 +76,13 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/T3_nota_pilihNota.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('mainpage')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li><a href="../templates/2pilihTopik.html">Pemilihan Topik</a></li>
-            <li><a href="../templates/T3_pilihAkitiviti.html">Pemilihan Aktiviti</a></li>
-            <li><a href="../templates/T3_nota_pilihNota.html">Pemilihan Nota</a></li>
+            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+            <li><a href=".{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+            <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
+            <li><a href="{{url_for('perpuluhan_nota')}}">Nota</a></li>
             <li>Peta Minda</li>
           </ol>
         </div>
@@ -102,14 +101,12 @@
               <h1>MATEMATIK PENGUNA I:<br>SIMPANAN DAN PELABURAN, KREDIT DAN HUTANG</h1>
             </div>
 
-            <div class="row" data-aos="fade-up" data-aos-delay="200">
-
-
-              <img src="http://math71.weebly.com/uploads/1/7/8/4/17847255/simpanan_orig.png" alt="Description of the image">
-
-
-
-
+            <div class="row image-gallery" data-aos="fade-up" data-aos-delay="200">
+              {% for encoded_image in encoded_images %}
+                <div class="image-container">
+                  <img src="data:image/png;base64,{{ encoded_image }}" alt="Image">
+                </div>
+              {% endfor %}
             </div>
 
           </div>

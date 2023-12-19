@@ -5,19 +5,19 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>SMG Tambah Nota</title>
+  <title>Vesperr Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/logo.png" rel="icon">
+  <link href="../assets/img/favicon.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
 
 
   <!-- Vendor CSS Files -->
@@ -46,26 +46,28 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
-
       <div class="logo">
-        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('mainpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
-          <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
+
+
     </div>
   </header><!-- End Header -->
+
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -73,9 +75,13 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
+            <li><a href="{{url_for('stdmaterial')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          
+          <ol>
+            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+            <li>Tingkatan 4</li>
+          </ol>
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -83,53 +89,69 @@
     <section class="inner-page">
       <div class="container">
 
-        <!-- ======= Activity Section ======= -->
-        <section id="activity" class="portfolio">
-          <div class="section-title" data-aos="fade-up">
-            <h1>Bahan Pembelajaran</h1>
-          </div>
 
-          <div class="row" data-aos="fade-up" data-aos-delay="400">
-            <a href="{{url_for('note_form')}}">
-              <div class="activityBox viewNota">
-                <h5> <i class="bi-eye" style="padding: 10px;"></i>Tambah Nota</h5>
+
+        <!-- ======= Features Section ======= -->
+        <section id="features" class="features">
+          <div class="container">
+            <div class="section-title" data-aos="fade-up">
+
+              <h1>MATEMATIK PENGUNA II:<br>PENGURUSAN KEWANGAN</h1>
+              <hr>
+            </div>
+
+            <div class="row" data-aos="fade-up" data-aos-delay="300">
+              <div class="col-6 obj">
+                <p><span>OBJEKTIF PEMBELAJARAN</span></p>
+
+                <p><strong>10.1 Perancangan dan Pengurusan Kewangan</strong></p>
+                <p>
+                  Menghuraikan proses pengurusan kewangan
+                  yang berkesan.<br><br>
+                  Membina dan membentang pelan kewangan
+                  peribadi untuk mencapai matlamat kewangan
+                  jangka pendek dan jangka panjang, dan
+                  seterusnya menilai kebolehlaksanaan pelan
+                  kewangan tersebut.
+                </p>
+
+
               </div>
-            </a>
-          </div>
 
-          <div class="row"data-aos="fade-up" data-aos-delay="800" style="padding: 10px;">
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col">Action</th>
-                  <th scope="col">Topik</th>
-                  <th scope="col">Jenis</th>
-                  <th scope="col">Nama</th>
-                  <th scope="col">Tambahan</th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for row in note %}
-                  <tr>
-                    <td>
-                      <a href="#"><button class="btn btn-danger">Delete</button></a>
-                      <a href="#"><button class="btn btn-warning">Modify</button></a>
-                    </td>
-                    <td>{{ row[1] }}</td>
-                    <td>{{ row[2] }}</td>
-                    <td>{{ row[3] }}</td>
-                    <td><a href="{{ url_for('download', filename=row[3]) }}" class="btn btn-primary" download>Download</a> </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
+              <div class="col-6">
+                <a href="{{url_for('tingkatan4_nota')}}">
+                  <div class="icon-box BoxNota">
+                    <h3><i class="ri-bar-chart-box-line"></i> Nota</h3>
+                  </div>
+                </a>
+
+                <a href="{{url_for('tingkatan4_latihan')}}">
+                  <div class="icon-box BoxLatihan">
+                    <h3> <i class="ri-bar-chart-box-line"></i> Latihan</h3>
+                  </div>
+                </a>
+
+                <a href="{{url_for('tingkatan4_kuiz')}}">
+                  <div class="icon-box BoxKuiz">
+                    <h3> <i class="ri-bar-chart-box-line"></i> Kuiz</h3>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-        </section><!-- End Activity Section -->
+        </section><!-- End Features Section -->
+
+
+
+
       </div>
     </section>
 
   </main><!-- End #main -->
 
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+      class="bi bi-arrow-up-short"></i></a>
   <!-- Vendor JS Files -->
   <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
@@ -143,4 +165,5 @@
   <script src="../assets/js/main.js"></script>
 
 </body>
+
 </html>

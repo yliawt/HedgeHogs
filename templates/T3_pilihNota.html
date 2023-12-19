@@ -71,21 +71,21 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
         <ol>
-          <li><a href="{{url_for('perpuluhan')}}"><i class="bi bi-arrow-left"></i></a></li>
+          <li><a href="{{url_for('tingkatan3')}}"><i class="bi bi-arrow-left"></i></a></li>
         </ol>
         <ol>
           <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-          <li><a href="{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
-          <li><a href="{{url_for('perpuluhan')}}">Perpuluhan</a></li>
-          <li>Latihan</li>
+          <li><a href=".{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+          <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
+          <li>Nota</li>
         </ol>
-        </div>
       </div>
-    </section><!-- End Breadcrumbs Section -->
+    </div>
+  </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
       <div class="container">
@@ -96,40 +96,68 @@
           <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-              <h1>NOMBOR PERPULUHAN</h1>
-              <hr>
+              <h1>MATEMATIK PENGUNA I:<br>SIMPANAN DAN PELABURAN, KREDIT DAN HUTANG</h1>
+           <hr>
             </div>
 
-            <div class="row">
+           <div class="row">
 
-              <!-- Container 1 -->
-              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
-                <a href="{{url_for('perpuluhan_latihan_link')}}" style="text-decoration: none; color: inherit;">
-                  <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
-                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                    <h4 class="title">Contoh Latihan</h4>
-                    <p class="description">PDF dan Jawapan</p>
+                  <!-- Container 1 -->
+                  <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan3_nota_minda')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
+                              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                              <h4 class="title">Nota Minda</h4>
+                              <p class="description">Bubble Map, Tree Diagram dan lain-lain</p>
+                          </div>
+                      </a>
                   </div>
-                </a>
+              
+                  <!-- Container 2 -->
+                  <div class="col-md-6 col-lg-3  align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan3_nota_pdf')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
+                              <div class="icon"><i class="bx bx-file"></i></div>
+                              <h4 class="title">Nota</h4>
+                              <p class="description">Nota PDF yang menarik dan berilmu</p>
+                          </div>
+                      </a>
+                  </div>
+              
+                  <!-- Container 3 -->
+                  <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan3_nota_video')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box3" data-aos="fade-up" data-aos-delay="300">
+                              <div class="icon"><i class="bx bx-tachometer"></i></div>
+                              <h4 class="title">Video</h4>
+                              <p class="description">Video dengan animasi dan pelbagai</p>
+                          </div>
+                      </a>
+                  </div>
+              
+                  <!-- Container 4 -->
+                  <div class="col-md-6 col-lg-3  align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan3_nota_kata')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box4" data-aos="fade-up" data-aos-delay="400">
+                              <div class="icon"><i class="bx bx-world"></i></div>
+                              <h4 class="title">Gerbang Kata</h4>
+                              <p class="description">Kata kunci dan maksud serta gambar rajah</p>
+                          </div>
+                      </a>
+                  </div>
               </div>
+              </div>
+              
+              
 
-              <!-- Container 2 -->
-              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
-                <a href="{{url_for('perpuluhan_latihan_game')}}" style="text-decoration: none; color: inherit;">
-                  <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
-                    <div class="icon"><i class="bx bx-file"></i></div>
-                    <h4 class="title">Permainan</h4>
-                    <p class="description">Memilih jawapan yang betul</p>
-                  </div>
-                </a>
-              </div>
-            </div>
           </div>
-        </section><!-- End Services Section -->
-
-
 
       </div>
+    </section><!-- End Services Section -->
+
+
+
+    </div>
     </section>
 
   </main><!-- End #main -->

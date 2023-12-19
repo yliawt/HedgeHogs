@@ -17,9 +17,9 @@
   <link
     href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
     rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
 
-    
+
 
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
@@ -32,6 +32,7 @@
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
+
 
   <!-- =======================================================
   * Template Name: Vesperr
@@ -49,19 +50,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li ><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li class="active"><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li class="active"><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -74,12 +75,9 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/1Index.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('lecpage')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
           </ol>
-          <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li>Profil</li>
-          </ol>
+       
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -92,9 +90,6 @@
         <!-- ======= Portfolio Section ======= -->
         <section id="profile" class="profile">
 
-
-
-
           <div class="section-title" data-aos="fade-up">
             <h1>Profil Anda</h1>
             <h5>Sila pastikan maklumat yang dikemaskini adalah maklumat yang tepat dan benar.</h5>
@@ -103,84 +98,144 @@
 
           <div class="container-fluid">
             <div class="row">
-              <div class="col-lg-12 d-flex align-items-stretch">
-               
-                  <div class="card-body p-4">
+              <div class="col-lg-4">
+                <div class="row">
+                  <!--Pic and Name-->
+                  <div class="card-body p-2" data-aos="fade-up" data-aos-delay="200">
 
-
-
-
-                    <form method="POST" action="{{url_for('insert')}}" >
+                    <form method="POST" action="{{url_for('insert')}}" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <div class="d-flex">
+                          <label for="fileToUpload">
+                            <div class="profile-pic"
+                              style="background-image: url('https://randomuser.me/api/portraits/med/men/65.jpg')">
+                              <span class="glyphicon glyphicon-camera"></span>
+                              <span>Tukar</span>
+                            </div>
+                          </label>
+                          <input type="file" name="fileToUpload" id="fileToUpload">
+                        </div>
+                      </div>
 
                       <div class="mb-3">
-                        <label for="type" class="form-label">Nama Penuh*</label>
-                        <input type="text" class="form-control" id="type" name="name" aria-describedby="typeHelp" value="Ali bin Abu"
-                          required>
+                        <label for="type" class="form-label">Nama*</label>
+                        <input type="text" class="form-control" id="type" name="name" aria-describedby="typeHelp"
+                           value="{% if info %}{{ info[0] }}{% else %}Ali bin Abu{% endif %}" required>
                         <div id="typeHelp" class="form-text"></div>
                       </div>
 
-                      <div class="mb-3">
-                        <label for="dateOfOwnership" class="form-label">Tarikh Lahir*</label>
-                        <input type="date" class="form-control" id="dateOfOwnership" name="birth"
-                          aria-describedby="dateOfOwnershipHelp" value="2001-01-01" required>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="revenuetype" class="form-label">Jantina*</label>
-                        <select id="revenuetype" class="form-select" name="gender" type="text" required>
-                          <option>Sila Pilih</option>
-                          <option>Lelaki</option>
-                          <option>Perempuan</option>
-                        </select>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="owner" class="form-label">Nombor Telefon*</label>
-                        <input type="tel" class="form-control" id="owner" name="phoneNo" aria-describedby="ownerHelp"
-                          value="01x-xxxxxxxx" pattern="[0-9]{3}-[0-9]{7,8}"required>
-                      </div>
-
-                      <div class="mb-3">
-                        <label for="assetDescription" class="form-label">Alamat Emel*</label>
-                        <input type="email" class="form-control" id="assetDescription"
-                          aria-describedby="assetDescriptionHelp" name="email" value="hellow@qqworld.com" required>
-                      </div>
 
 
-
-                      <div class="d-flex justify-content-center">
+                      <div class="d-flex">
                         <a>
-                          <button type="submit" class="btn btn-primary" id="submitInventoryButton"
-                            style="width: 300px; margin: 10px;">Simpan</button>
+                          <button type="submit" class="btn btn-primary" id="submitInventoryButton">Kemaskini</button>
                         </a>
+                      </div>
+                      <div class="d-flex">
                         <a>
-                          <button type="button" class="btn btn-outline-primary" id="cancelInventoryButton"
-                            style="width: 300px; margin: 10px;">Batal</button>
+                          <button type="submit" class="btn btn-primary" id="submitInventoryButton">Tukar Kata
+                            Laluan</button>
                         </a>
                       </div>
                     </form>
 
 
+                  </div>
+                  
+                 
+                </div>
+                <!--End Pic and Name-->
+                 <!--Description-->
+                <div class="row">
+                  <div class="card-body p-2" data-aos="fade-up" data-aos-delay="400">
 
-                    <!-- Display Add Successful -->
-                    <script>
-                      document.getElementById('submitInventoryButton').addEventListener('click', function (event) {
-                        alert('Maklumat berjaya dikemaskini.');
-                      });
-                    </script>
-
-                    <!-- Display Add Cancelled -->
-                    <script>
-                      document.getElementById('cancelInventoryButton').addEventListener('click', function () {
-                        event.preventDefault(); // Prevent the form from submitting for demo purposes
-                        alert('Maklumat tidak dikemaskini. Sila cuba sekali lagi');
-                      });
-                    </script>
+                    <form method="POST" action="{{url_for('insert')}}" enctype="multipart/form-data">
+                      <div class="mb-3">
+                        <label for="description" class="form-label">Huraian Saya*</label>
+                        <textarea class="form-control" id="description" name="huraian"
+                          aria-describedby="descriptionHelp" required>{% if info %}{{ info[10] }}{% else %}Huraian Saya.{% endif %}
+                      </textarea>
+                        <div id="descriptionHelp" class="form-text"></div>
+                      </div>
+                      <div class="d-flex">
+                        <a><button type="submit" class="btn btn-primary" id="submitInventoryButton">Kemaskini</button></a>
+                      </div>
+                    </form>
 
 
                   </div>
-               
+
+
+                </div>
+
+
               </div>
+              <!--End Description-->
+<!--Personal Information-->
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="card-body p-2" data-aos="fade-up" data-aos-delay="200">
+
+                    <form method="POST" action="{{url_for('insert')}}">
+                      <div class="mb-3">
+                        <label for="dateOfOwnership" class="form-label">Tarikh Lahir*</label>
+                        <input type="date" class="form-control" id="dateOfOwnership" name="birth"
+                          aria-describedby="dateOfOwnershipHelp"  value="{% if info %}{{ info[1] }}{% else %}01-01-2001{% endif %}" required> required>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="revenuetype" class="form-label">Jantina*</label>
+                        <select id="revenuetype" class="form-select" name="gender" required>
+                            <option {% if not info %}selected{% endif %}>Sila Pilih</option>
+                            <option {% if info and info[2] == 'Lelaki' %}selected{% endif %}>Lelaki</option>
+                            <option {% if info and info[2] == 'Perempuan' %}selected{% endif %}>Perempuan</option>
+                        </select>
+
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="owner" class="form-label">Nombor Telefon*</label>
+                        <input type="tel" class="form-control" id="owner" name="phoneNo" aria-describedby="ownerHelp"
+                           value="{% if info %}{{ info[3] }}{% else %}01x-xxxxxxx{% endif %}"  pattern="[0-9]{3}-[0-9]{7,8}" required>
+                      </div>
+                      
+
+                      <div class="mb-3">
+                        <label for="assetDescription" class="form-label">Alamat Emel*</label>
+                        <input type="email" class="form-control" id="assetDescription"
+                          aria-describedby="assetDescriptionHelp" name="email"  value="{% if info %}{{ info[4] }}{% else %}Hello@gmail.com{% endif %}"  required>
+                      </div>
+                      <div class="mb-3">
+                        <label for="assetDescription" class="form-label">Sekolah*</label>
+                        <input type="school" class="form-control" id="assetDescription"
+                          aria-describedby="assetDescriptionHelp" name="school"  value="{% if info %}{{ info[5] }}{% else %}Sekolah Menengah{% endif %}"  required>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="type" class="form-label">Alamat*</label>
+                        <input type="text" class="form-control" id="type" name="baris1" aria-describedby="typeHelp"
+                           value="{% if info %}{{ info[6] }}{% else %}Baris 1{% endif %}" required>
+                          <input type="text" class="form-control" id="type" name="baris2" aria-describedby="typeHelp"
+                          value="{% if info %}{{ info[7] }}{% else %}Baris 2{% endif %}">
+                          <input type="text" class="form-control" id="type" name="poskod" aria-describedby="typeHelp"
+                          value="{% if info %}{{ info[8] }}{% else %}Poskod{% endif %}" required>
+                          <input type="text" class="form-control" id="type" name="negeri" aria-describedby="typeHelp"
+                          value="{% if info %}{{ info[9] }}{% else %}negeri {% endif %}" required>
+                        <div id="typeHelp" class="form-text"></div>
+                      </div>
+
+                      <div class="d-flex">
+                        <a>
+                          <button type="submit" class="btn btn-primary" id="submitInventoryButton">Kemaskini</button>
+                        </a>
+                      </div>
+                    </form>
+                  </div>
+
+                </div>
+                <div class="row"></div>
+              </div>
+              <!--End Personal Profile-->
             </div>
           </div>
 
@@ -207,7 +262,20 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+  <!-- Display Add Successful -->
+  <script>
+    document.getElementById('submitInventoryButton').addEventListener('click', function (event) {
+      alert('Maklumat berjaya dikemaskini.');
+    });
+  </script>
 
+  <!-- Display Add Cancelled -->
+  <script>
+    document.getElementById('cancelInventoryButton').addEventListener('click', function () {
+      event.preventDefault(); // Prevent the form from submitting for demo purposes
+      alert('Maklumat tidak dikemaskini. Sila cuba sekali lagi');
+    });
+  </script>
 </body>
 
 </html>

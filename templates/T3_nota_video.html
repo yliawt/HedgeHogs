@@ -40,39 +40,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <style>
-    .collapsible {
-      background-color: #777;
-      color: white;
-      cursor: pointer;
-      padding: 18px;
-      width: 100%;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 15px;
-      margin-top: 10px;
-      margin-bottom: 5px;
-    }
 
-
-    .content {
-      padding: 0 18px;
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.2s ease-out;
-      background-color: #f1f1f1;
-      text-align: center;
-    }
-
-    @media screen and (min-width: 800px) {
-    .content iframe {
-        width: 664px;
-        height: 498px;
-    }
-}
-
-  </style>
 </head>
 
 <body>
@@ -82,19 +50,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_fr('mainpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -109,13 +77,13 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/T3_nota_pilihNota.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('tingkatan3_nota')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li><a href="../templates/2pilihTopik.html">Pemilihan Topik</a></li>
-            <li><a href="../templates/T3_pilihAkitiviti.html">Pemilihan Aktiviti</a></li>
-            <li><a href="../templates/T3_nota_pilihNota.html">Pemilihan Nota</a></li>
+            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+            <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
+            <li><a href="{{url_for('tingkatan3_nota')}}">Nota</a></li>
             <li>Video</li>
           </ol>
         </div>
@@ -135,38 +103,14 @@
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="200">
-
-
-
-
-              <button class="collapsible">Video 01</button>
+            {% for videos, sequence in videos_with_sequence %}
+              <button class="collapsible">{{ sequence }}</button>
               <div class="content">
-                <p>Content 1</p>
-                <iframe  src="https://www.youtube.com/embed/AR0m_mLC_cs"
-                  title="Bab 3 (part I) Matematik Tingkatan 3(kssm): 3.1a Simpanan" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
+              <video controls class="video-container">
+                  <source src="{{ url_for('serve_video', filename=videos[1]) }}" type="video/mp4">
+              </video>
               </div>
-
-              <button class="collapsible">Video 02</button>
-              <div class="content">
-                <p>Content 2</p>
-                <iframe src="https://www.youtube.com/embed/yeGQ6CCN8Pk"
-                  title="Bab 3 (part II) Matematik Tingkatan 3( kssm): 3.1b Pelaburan" frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-              </div>
-
-              <button class="collapsible">Video 03</button>
-              <div class="content">
-                <p>Content 1</p>
-                <iframe  src="https://www.youtube.com/embed/ZFGYu-O1YJs"
-                  title="Bab 3 (part III) Matematik Tingkatan 3( kssm) 3.2: Pengurusan kredit dan hutang"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen></iframe>
-              </div>
-
+            {% endfor %}
 
               <script>
                 var coll = document.getElementsByClassName("collapsible");
@@ -184,8 +128,6 @@
                   });
                 }
               </script>
-
-
             </div>
 
           </div>

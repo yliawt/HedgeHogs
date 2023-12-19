@@ -49,20 +49,20 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1lecIndex.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2lecpilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
-        </ul>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+            <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+            <li><a href="{{url_for('profile')}}">Profil</a></li>
+            <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+            <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
+          </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
@@ -74,12 +74,9 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/1lecIndex.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('lecpage')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li>Pemilihan Topik</li>
-          </ol>
+         
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -110,7 +107,7 @@
               </a>
             </div>
             <div class="col-4">
-              <a href="{{url_for('upload_quiz')}}">
+              <a href="{{url_for('upload_kuiz')}}">
                 <div class="activityBox viewKuiz">
                   <h5> <i class="bi-eye" style="padding: 10px;"></i>Muatnaik Kuiz</h5>
                 </div>
@@ -119,7 +116,7 @@
           </div>
 
         </section><!-- End Activity Section -->
-<hr>
+<hr data-aos="fade-up" data-aos-delay="200">
         <section id="portfolio" class="portfolio">
           
 
@@ -142,7 +139,7 @@
                         <input type="text" name="name" class="form-control" style="height :40px" id="text" placeholder="Pencarian" required>
                       </div>
                       <div class="col-4" >
-                        <button type="submit" class="btn btn-search w-100 d-block"><i class="bi bi-search"></i> Cari</button>
+                        <button type="submit" class="btn btn-search w-100 d-block"><i class="bi bi-search"></i><span> Cari</span></button>
                       </div>
                     </div>
                   </div>
@@ -156,7 +153,7 @@
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
             <div class="col-lg-4 col-md-6 portfolio-item mini">
               <div class="portfolio-wrap">
-                <a href="../templates/Perpuluhan_pilihAkitiviti.html">
+                <a href="{{url_for('perpuluhan')}}">
                   <img src="../assets/img/moreservice1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
                     <h4>Perpuluhan</h4>
@@ -167,7 +164,7 @@
             </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item t3">
-              <a href="..//templates/T3_pilihAkitiviti.html">
+              <a href="{{url_for('tingkatan3')}}">
                 <div class="portfolio-wrap">
                   <img src="../assets/img/moreservice2.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
@@ -180,7 +177,7 @@
 
             <div class="col-lg-4 col-md-6 portfolio-item t4">
               <div class="portfolio-wrap">
-                <a href="../templates/T4_pilihAkitiviti.html">
+                <a href="{{url_for('tingkatan4')}}">
                   <img src="../assets/img/moreservice3.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
                     <h4>Matematik Pengguna II</h4>
