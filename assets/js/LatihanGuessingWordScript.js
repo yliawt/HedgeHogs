@@ -1,4 +1,5 @@
 const inputs = document.querySelector(".inputs"),
+soalanTag = document.querySelector(".soalan span"),
 hintTag = document.querySelector(".hint span"),
 guessLeft = document.querySelector(".guess-left span"),
 wrongLetter = document.querySelector(".wrong-letter span"),
@@ -12,6 +13,7 @@ function randomWord() {
     word = ranItem.word;
     maxGuesses = word.length >= 5 ? 8 : 6;
     correctLetters = []; incorrectLetters = [];
+    soalanTag.innerText = ranItem.soalan;
     hintTag.innerText = ranItem.hint;
     guessLeft.innerText = maxGuesses;
     wrongLetter.innerText = incorrectLetters;
@@ -26,35 +28,43 @@ randomWord();
 
 function initGame(e) {
     let key = e.target.value.toLowerCase();
-    if(key.match(/^[A-Za-z]+$/) && !incorrectLetters.includes(` ${key}`) && !correctLetters.includes(key)) {
-        if(word.includes(key)) {
-            for (let i = 0; i < word.length; i++) {
-                if(word[i] == key) {
-                    correctLetters += key;
-                    inputs.querySelectorAll("input")[i].value = key;
-                }
-            }
-        } else {
-            maxGuesses--;
-            incorrectLetters.push(` ${key}`);
-        }
-        guessLeft.innerText = maxGuesses;
-        wrongLetter.innerText = incorrectLetters;
+
+    if (incorrectLetters.includes(` ${key}`) || correctLetters.includes(key)) {
+        // Block input if it has already been guessed
+        typingInput.value = "";
+        return;
     }
+
+    if (word.includes(key)) {
+        for (let i = 0; i < word.length; i++) {
+            if (word[i] == key) {
+                correctLetters += key;
+                inputs.querySelectorAll("input")[i].value = key;
+            }
+        }
+    } else {
+        maxGuesses--;
+        incorrectLetters.push(` ${key}`);
+    }
+
+    guessLeft.innerText = maxGuesses;
+    wrongLetter.innerText = incorrectLetters;
+
     typingInput.value = "";
 
     setTimeout(() => {
-        if(correctLetters.length === word.length) {
+        if (correctLetters.length === word.length) {
             alert(`Congrats! You found the word ${word.toUpperCase()}`);
             return randomWord();
-        } else if(maxGuesses < 1) {
+        } else if (maxGuesses < 1) {
             alert("Game over! You don't have remaining guesses");
-            for(let i = 0; i < word.length; i++) {
+            for (let i = 0; i < word.length; i++) {
                 inputs.querySelectorAll("input")[i].value = word[i];
             }
         }
     }, 100);
 }
+
 
 btn.addEventListener("click", randomWord);
 typingInput.addEventListener("input", initGame);
