@@ -15,7 +15,6 @@ body{
   background: #1BB295;
 }
 .wrapper{
-  width: 430px;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -81,6 +80,25 @@ body{
   background: #1BB295;
   transition: all 0.3s ease;
   margin-bottom: 10px;
+}
+
+.button.hint{
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+  outline: none;
+  padding: 15px 0;
+  font-size: 17px;
+  border-radius: 5px;
+  background: #1BB295;
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+}
+.greyed-button {
+  background: #808080 !important; /* Change the background color to grey */
+  color: white; /* Change the text color to white or any suitable color */
+  cursor: not-allowed; /* Change the cursor to indicate it's disabled */
 }
 
 /* Additional styling for the "Kembali Website" button */
