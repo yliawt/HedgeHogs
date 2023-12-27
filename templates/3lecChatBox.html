@@ -49,8 +49,8 @@
       <nav id="navbar" class="navbar">
         <ul>
           <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-          <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-          <li class="active"><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li class="active"><a href="{{url_for('chatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -112,7 +112,7 @@
                         </li>
                       {% endfor %}
                         {% else %}
-            <li class="no-message-item" style="color:grey !important">No messages yet.</li>
+            <li class="no-message-item">No messages yet.</li>
         {% endif %}
                       </ul>
                     </div>

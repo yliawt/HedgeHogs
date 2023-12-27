@@ -47,20 +47,21 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
+        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
+
       <nav id="navbar" class="navbar">
         <ul>
-            <li class="active"><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
-            <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
-            <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
-            <li><a href="{{url_for('profile')}}">Profil</a></li>
-            <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
-            <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
-          </ul>
+          <li class="active"><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+          <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
+        </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -78,7 +79,7 @@
             <h1 data-aos="fade-up" style="color: #edc764;">Silent Math <br>Genius</h1>
 
 
-            <h2 data-aos="fade-up" data-aos-delay="400" style="color: white;">Hi username!<br></h2>
+            <h2 data-aos="fade-up" data-aos-delay="400" style="color: white;">Hi {{user}}!<br></h2>
             <h2 data-aos="fade-up" data-aos-delay="600" style="color: white;"> Kami menjamin melalui laman web ini, anda boleh mempelajari Matematik dengan 
               <span id="typed"class="typed"data-typed-items="interaktif, gembira, seronok, bermain, latihan, bersungguh-sungguh" style="color:#f3b53a"></span>
             </h2>

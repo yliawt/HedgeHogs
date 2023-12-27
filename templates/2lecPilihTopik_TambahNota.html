@@ -57,7 +57,7 @@
         <ul>
           <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
           <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -73,9 +73,13 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
+            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          
+          <ol>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('materials')}}">Pemilihan Topik</a></li>
+            <li>Nota</li>
+          </ol>
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
