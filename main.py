@@ -18,7 +18,7 @@ app.config['SECRET_KEY'] = 'SDKFJSDFOWEIOF'
 socketio = SocketIO(app)
 
 user_id = ""
-user_rooms = {}
+rooms={}
 
 @app.route('/')
 def index():
@@ -32,7 +32,8 @@ def login_page():
 
 @app.route('/mainpage')
 def mainpage():
-    return render_template('1Index.html')
+    user=session['name']
+    return render_template('1Index.html',user=user[0])
 
 
 @app.route('/lecpage')
@@ -44,57 +45,58 @@ def lecpage():
 def materials():
     return render_template('2lecPilihTopik.html')
 
+
 @app.route('/lecChatBox')
-def lecchatbox():
+def lecChatBox():
     cur = mysql.connection.cursor()
     cur.execute("SELECT DISTINCT id FROM profile")
-    user_id=cur.fetchall()
+    user_id=cur.fetchall();
     cur.close()
+    print(user_id)
     return render_template("3lecChatBox.html", username=user_id)
 
 @app.route('/selectedChatBox',methods=['POST','GET'])
 def selectedChatBox():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT DISTINCT id FROM profile")
-    std = cur.fetchall()
-    user_id = session.get('username')
+    global user_id
     username=request.args.get('username')
     cur=mysql.connection.cursor()
     cur.execute("SELECT roomcode FROM profile WHERE id = %s",(username,))
     roomcode_result = cur.fetchone()
     roomcode = roomcode_result[0]
     session['room']=roomcode
-    user_room = user_rooms.get(user_id, None)
-    if user_room is None:
-        # Handle the case where the user's chat room does not exist
-        return redirect(url_for('login'))  # Redirect to login page or show an error message
-
+    session['name']=username
+    if roomcode not in rooms:
+        new_room = {
+            'members': 0,
+            'messages': []
+        }
+        rooms[roomcode] = new_room
     cur.execute("SELECT sender, message, timestamp FROM chatbox WHERE roomcode = %s ORDER BY timestamp ASC", (roomcode,))
     messages = cur.fetchall()
     cur.close()
     username=str(username)
-    return render_template('3lecChatBox.html',room=roomcode, username=std, user=user_id, messages=messages)
+    return render_template('3lecChatBox.html',room=roomcode, user=user_id, messages=messages)
 
 @app.route('/chatbox')
 def chatbox():
-    user_id = session.get('username')
-    # Retrieve the user's chat room from the user_rooms dictionary
-    user_room = user_rooms.get(user_id, None)
-    if user_room is None:
-        # Handle the case where the user's chat room does not exist
-        return redirect(url_for('login'))  # Redirect to login page or show an error message
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT roomcode FROM profile WHERE id = %s", (user_id,))
+    global user_id
+    id=session["id"]
+    cur=mysql.connection.cursor()
+    cur.execute("SELECT roomcode FROM profile WHERE id = %s",(id,))
     roomcode_result = cur.fetchone()
     roomcode = roomcode_result[0]
-    session['room'] = roomcode
-
-    cur = mysql.connection.cursor()
+    session['room']=roomcode
+    if roomcode not in rooms:
+        new_room = {
+            'members': 0,
+            'messages': []
+        }
+        rooms[roomcode] = new_room
     cur.execute("SELECT sender, message, timestamp FROM chatbox WHERE roomcode = %s ORDER BY timestamp ASC", (roomcode,))
     messages = cur.fetchall()
     cur.close()
-
-    return render_template('3ChatBox.html', room=roomcode, user=user_id, messages=messages)
+    user_id=str(id)
+    return render_template('3ChatBox.html',room=roomcode, user=user_id, messages=messages)
 
 @socketio.on('connect')
 def handle_connect():
@@ -104,7 +106,7 @@ def handle_connect():
 @socketio.on('message')
 def handle_message(payload):
     room = session.get('room')
-    name = session.get('username')
+    name = session.get('id')
     message_text = payload["message"]
     current_time = datetime.now()
     message = {
@@ -112,7 +114,7 @@ def handle_message(payload):
         "message": message_text
     }
     send(message, to=room)
-    user_rooms[room]["messages"].append(message)
+    rooms[room]["messages"].append(message)
     custom_formatted_time = current_time.strftime('%d/%m/%Y, %I:%M:%S %p')
 
     cur = mysql.connection.cursor()
@@ -125,17 +127,12 @@ def handle_message(payload):
 
 @socketio.on('disconnect')
 def handle_disconnect():
-    room = session.get("room")
+    room = session.get("roomcode")
     leave_room(room)
 
 @app.route('/profile')
 def profile():
-    user_id=session.get("username")
-    print(user_id)
-    cur=mysql.connection.cursor()
-    cur.execute("SELECT name, birth, gender, phone, email, school, alamat1, alamat2, poskod, negeri, huraian FROM profile WHERE id=%s", (user_id,))
-    info= cur.fetchone()
-    return render_template('4profile.html', info=info)
+    return render_template('4profile.html')
 
 
 @app.route('/about_us')
@@ -461,15 +458,16 @@ def quiz_form():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    global user_id
     if request.method == "POST":
-        room_code = generate_room_code(6, list(user_rooms.keys()))
+        room_code = generate_room_code(6, list(rooms.keys()))
         id = request.form["id"]
         password = request.form["password"]
         role = "Pelajar"
         cur = mysql.connection.cursor()
         cur.execute("INSERT INTO profile (id, password, role, roomcode) VALUES (%s, %s, %s, %s)", (id, password, role, room_code))
         mysql.connection.commit()
-        session['username'] = id
+        user_id = id
         return render_template('4Profile.html')
     return render_template('login.html')
 
@@ -494,52 +492,30 @@ def login():
         role = cur.fetchone()
         cur.execute("SELECT password FROM profile WHERE id = %s", (id,))
         check_password = cur.fetchone()
-        cur.close()
         if password == check_password[0] and role[0] == option:
-            session['username'] = id
-            # Create a chat room for the user and store it in the user_rooms dictionary
-            user_rooms[id] = {
-                'members': 0,
-                'messages': []
-            }
+            cur.execute("SELECT name FROM profile WHERE id =%s",(id,))
+            session["id"]=id
+            session['name']=cur.fetchone()
             if option == "Pelajar":
                 return redirect(url_for('mainpage'))
             else:
                 return redirect(url_for('lecpage'))
     return render_template('login.html')
 
+
 @app.route("/insert", methods=["POST", "GET"])
 def insert():
-    user_id = session.get("username")
+    global user_id
     if request.method == "POST":
-        if "name" in request.form:
-            name = request.form["name"]
-            cur = mysql.connection.cursor()
-            cur.execute(
-                "UPDATE profile SET name=%s WHERE id = %s",
-                (name, user_id))
-            mysql.connection.commit()
-        elif "huraian" in request.form:
-            huraian = request.form["huraian"]
-            cur = mysql.connection.cursor()
-            cur.execute(
-                "UPDATE profile SET huraian=%s WHERE id = %s",
-                (huraian, user_id))
-            mysql.connection.commit()
-        else:
-            birth = request.form["birth"]
-            gender = request.form["gender"]
-            phone_no = request.form["phoneNo"]
-            email = request.form["email"]
-            school = request.form["school"]
-            baris1=request.form["baris1"]
-            baris2 = request.form["baris2"]
-            poskod = request.form["poskod"]
-            negeri = request.form["negeri"]
-            cur = mysql.connection.cursor()
-            cur.execute("UPDATE profile SET birth=%s, gender=%s, phone=%s, email=%s, school=%s, alamat1=%s, alamat2=%s, poskod=%s, negeri=%s WHERE id = %s",
-                        (birth, gender, phone_no, email, school, baris1, baris2, poskod, negeri, user_id))
-            mysql.connection.commit()
+        name = request.form["name"]
+        birth = request.form["birth"]
+        gender = request.form["gender"]
+        phone_no = request.form["phoneNo"]
+        email = request.form["email"]
+        cur = mysql.connection.cursor()
+        cur.execute("UPDATE profile SET name=%s, birth=%s, gender=%s, phone=%s, email=%s WHERE id = %s",
+                    (name, birth, gender, phone_no, email, user_id))
+        mysql.connection.commit()
         return redirect(url_for('mainpage'))
     return render_template("4profile.html")
 
@@ -554,10 +530,9 @@ def upload_materials():
             words = request.form['perkataan']
             soalan = request.form['soalan']
             hint = request.form['hint']
-            cur = mysql.connection.cursor()
-            cur.execute(
-                "INSERT INTO materials (type, topic, category, words, soalan, hint) VALUES (%s, %s, %s, %s, %s, %s)",
-                (materials_type, topic, category, words, soalan, hint))
+            cur=mysql.connection.cursor()
+            cur.execute("INSERT INTO materials (type, topic, category, words, soalan, hint) VALUES (%s, %s, %s, %s, %s, %s)",
+                        (materials_type, topic, category, words, soalan, hint))
             mysql.connection.commit()
         else:
             filename = request.form['filename']
