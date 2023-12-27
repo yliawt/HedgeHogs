@@ -109,7 +109,6 @@ h6 {
 }
 
 #header.header-scrolled {
-  background: rgba(0,72,64,1);
   box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
   padding: 12px 0;
 }
@@ -863,20 +862,7 @@ section.inner-page {
   font-family: 'Titan One', cursive;
 
 }
-@media (max-width: 768px) {
-  /* Adjust styles for smaller screens */
-  .features .row .obj {
-    padding: 30px;
-  }
 
-  .features .row .obj p {
-    font-size: 14px;
-  }
-
-  .features .row .obj p span {
-    font-size: 18px;
-  }
-}
 
 .features .icon-box {
   display: flex;
@@ -1114,24 +1100,6 @@ section.inner-page {
   height: 50px;
 }
 
-@media (max-width: 768px) {
-  .btn-search {
-    padding: 10px;
-    /* Adjust padding for smaller screens */
-    height: 40px; /* You can adjust the height if needed */
-  }
-
-  .btn-search span {
-    display: none;
-  }
-}
-
-/* Optional: Show the text on hover for small screens */
-@media (max-width: 768px) {
-  .btn-search:hover span {
-    display: inline;
-  }
-}
 .section-title hr {
 
   width: 50%;
@@ -1171,7 +1139,7 @@ section.inner-page {
   font-weight: 600;
   line-height: 1;
   text-transform: uppercase;
-  color: #c1c1c1;
+  color: #222222;
 
   border-radius: 15px;
   margin-bottom: 5px;
@@ -1309,8 +1277,9 @@ Profile
 .profile /* Styles for the form container */
 form {
   margin: 0 auto;
-  background: rgba(255, 255, 255, 1); /* Set the background color with transparency */
+  background: rgba(255, 255, 255, 0.8); /* Set the background color with transparency */
   padding: 20px;
+  border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
 }
 
@@ -1338,24 +1307,16 @@ form {
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-.profile .d-flex {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%; /* Ensure the container takes full height */
-
-}
 
 /* Styles for form buttons */
 .profile .btn-primary,
-  .profile .btn-outline-primary {
-   width: 250px;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-    cursor: pointer;
-    
-  }
+.btn-outline-primary {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 /* Hover effect for primary button */
 .profile .btn-primary:hover {
@@ -1369,39 +1330,7 @@ form {
   color: #fff;
 }
 
-.profile .profile-pic {
-  border-radius: 50%;
-  height: 150px;
-  width: 150px;
-  background-size: cover;
-  background-position: center;
-  background-blend-mode: multiply;
-  vertical-align: middle;
-  text-align: center;
-  color: transparent;
-  transition: all .3s ease;
-  text-decoration: none;
-  cursor: pointer;
-}
 
-.profile .profile-pic:hover {
-  background-color: rgba(0,0,0,.5);
-  z-index: 10000;
-  color: #fff;
-  transition: all .3s ease;
-  text-decoration: none;
-}
-
-.profile .profile-pic span {
-  display: inline-block;
-  padding-top: 4.5em;
-  padding-bottom: 4.5em;
-}
-
-.profile form input[type="file"] {
-        display: none;
-        cursor: pointer;
-}
 /*--------------------------------------------------------------
 # Team
 --------------------------------------------------------------*/
@@ -1765,7 +1694,7 @@ form {
 --------------------------------------------------------------*/
 .breadcrumbs {
   padding: 15px 0;
-  background-color: rgba(0,72,64,1);
+  background-color: rgba(0, 0, 0, 0.05);
   min-height: 40px;
   margin-top: 100px;
   color: #b4b4b4;
@@ -1937,22 +1866,9 @@ form {
   transition: background-color 0.3s ease, color 0.3s ease;
   border-radius: 15px;
   font-weight: 8000px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(34, 6, 53,0.5);
 
 }
-
-/* Default font size */
-.activityBox h5 {
-  font-size: 1.5rem; /* Adjust the base font size as needed */
-}
-
-/* Responsive font size */
-@media (max-width: 768px) {
-  .activityBox h5 {
-    font-size: 1rem; /* Adjust the font size for smaller screens */
-  }
-}
-
 
 /*Button with Hovering*/
 .activityBox.viewNota {
