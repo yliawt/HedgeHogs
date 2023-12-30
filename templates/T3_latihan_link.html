@@ -50,16 +50,16 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="{{url_for('mainpage')}}">Silent Math Genius</a></h1>
+        <h1><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-          <li class="active"><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
-          <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li class="active"><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Bahan Pembelajaran</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('chatbox') }}{% else %}{{ url_for('lecchatbox') }}{% endif %}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -80,8 +80,8 @@
             <li><a href="{{url_for('tingkatan3_latihan')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-            <li><a href="{{url_for('stdmaterial')}}">Pemilihan Topik</a></li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
             <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
             <li><a href="{{url_for('tingkatan3_latihan')}}">Latihan</li>
             <li>Contoh Latihan</li>

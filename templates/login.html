@@ -21,9 +21,6 @@
         <form action="{{url_for('login')}}" method = "POST" class="sign-in-form">
           <img src="../assets/img/logo-nobg.png" style="max-width: 200px;" class="image" alt="" />
           <h2 class="title">Daftar Masuk</h2>
-
-
-
           <div class="input-field">
             <i class="fas fa-list"></i> <!-- Assuming you have an icon for the dropdown -->
             <select class="form-select" required name="option">
@@ -31,9 +28,6 @@
               <option value="Guru">Guru</option>
             </select>
           </div>
-          
-
-          
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" name="id" placeholder="ID Pengguna" required />
@@ -43,17 +37,16 @@
             <input type="password" name="password" placeholder="Kata Laluan" required />
           </div>
           <input type="submit" value="Daftar Masuk" class="btn solid" />
-
-
         </form>
 
-        <form action="{{url_for('signup')}}" method = "POST" class="sign-up-form" onsubmit="return validatePassword()">
+        <form action="{{url_for('signup')}}" method = "POST" class="sign-up-form" onsubmit="return validatePassword() && validateForm()">
           <img src="../assets/img/logo-nobg.png" style="max-width: 200px;" class="image" alt="" />
           <h2 class="title">Daftar Baharu</h2>
           <h5>Pendaftaran akaun baharu hanya untuk pelajar sahaja</h5>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input type="text" id="id" name="id" placeholder="ID Pengguna" required />
+            <span id="error-message" class="error-message"></span>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
@@ -122,6 +115,24 @@
         return true; // Allow form submission
     }
 </script>
+
+<script>
+    var idList = {{ idlist | tojson | safe }};
+
+    function validateForm() {
+        var enteredId = document.getElementById("id").value;
+        console.log("Entered ID: " + enteredId);
+        console.log("ID List: " + JSON.stringify(idList));
+        // Check if entered ID exists in the idList
+        if (idList.includes(enteredId)) {
+            document.getElementById("error-message").innerHTML = "ID sudah daftar dalam sistem. Sila pilih ID yang lain.";
+            return false; // Prevent form submission
+        } else {
+            return true; // Allow form submission
+        }
+    }
+</script>
+
 </body>
 
 </html>

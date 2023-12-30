@@ -90,58 +90,64 @@
         <section id="portfolio" class="portfolio">
 
           <div class="section-title" data-aos="fade-up">
-            <h1>Tambah Latihan</h1>
+            {% if action == 'modify' %}
+              <h1>Kemas Kini Latihan</h1>
+            {% else %}
+              <h1>Tambah Latihan</h1>
+            {% endif %}
           </div>
           <div class="container-fluid" data-aos="fade-up" data-aos-delay="200">
             <div class="row">
               <div class="col-lg-12 d-flex align-items-stretch">
                 <div class="card w-100">
                   <div class="card-body p-4">
-                    <form action="{{url_for('upload_materials')}}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
+                    <form action="{% if action == 'modify latihan' %}{{ url_for('modify_materials', name=nota[2]) }}{% elif action == 'modify permainan' %}{{ url_for('update_permainan', name=nota[2]) }}{% else %}{{ url_for('upload_materials') }}{% endif %}" method="POST"enctype="multipart/form-data">
                       <input type="hidden" name="type" value="latihan">
                       <div class="mb-3 row">
                         <div class="col-6">
                           <label for="revenuetype" class="form-label">Topik</label>
-                          <select id="revenuetype" class="form-select" name="topic" type="text" required>
-                            <option>Sila Pilih</option>
-                            <option>Perpuluhan</option>
-                            <option>Tingkatan 3: Matematik Pengguna I</option>
-                            <option>Tingkatan 4: Matematik Pengguna II</option>
+                          <select id="revenuetype" class="form-select" name="topic" required oninvalid="this.setCustomValidity('Sila pilih satu topik.')" oninput="this.setCustomValidity('')">
+                              <option value="" disabled selected>Sila Pilih</option>
+                              <option {% if nota[0] == 'Perpuluhan' %}selected{% endif %}>Perpuluhan</option>
+                              <option {% if nota[0] == 'Tingkatan 3: Matematik Pengguna I' %}selected{% endif %}>Tingkatan 3: Matematik Pengguna I</option>
+                              <option {% if nota[0] == 'Tingkatan 4: Matematik Pengguna II' %}selected{% endif %}>Tingkatan 4: Matematik Pengguna II</option>
                           </select>
                         </div>
 
                         <div class="col-6">
                           <label for="revenuetype" class="form-label">Jenis</label>
-                          <select id="revenuetype" class="form-select" name="category" type="text" required>
-                            <option>Latihan</option>
-                            <option>Permainan</option>
+                          <select id="category" class="form-select" name="category" type="text" required>
+                            <option {% if nota[1] == 'Latihan' %}selected{% endif %}>Latihan</option>
+                            <option {% if nota[1] == 'Permainan' %}selected{% endif %}>Permainan</option>
                           </select>
                         </div>
                       </div>
 
                       <div class="mb-3 latihan-fields">
                         <label for="type" class="form-label">Nama</label>
-                        <input type="text" class="form-control" name="filename" id="type" >
+                        <input type="text" class="form-control" name="filename" id="type" value="{{ nota[2] if nota[2] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan nama latihan.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="mb-3 latihan-fields">
                         <label for="avatar">Description</label>
-                        <input type="text" class="form-control" name="description" id="type">
-                        <input type="file" id="avatar" name="file" style="margin-top: 10px;">
+                        <input type="text" class="form-control" name="description" id="type" value="{{ nota[3] if nota[3] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan description latihan.')" oninput="this.setCustomValidity('')">
+                        <input type="file" id="avatar" name="file" style="margin-top: 10px;" onchange="validateFile()" required oninvalid="this.setCustomValidity('Sila masukkan file latihan.')" oninput="this.setCustomValidity('')">
+                        <p id="file-error" style="color: red;"></p>
                       </div>
 
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="perkataan" class="form-label">Perkataan</label>
-                        <input type="text" class="form-control" name="perkataan" id="perkataan">
+                        <input type="text" class="form-control" name="perkataan" id="perkataan" value="{{ nota[3] if nota[3] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan perkataan untuk soalan.')" oninput="this.setCustomValidity('')">
+
                       </div>
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="soalan" class="form-label">Soalan</label>
-                        <input type="text" class="form-control" name="soalan" id="soalan">
+                        <input type="text" class="form-control" name="soalan" id="soalan" value="{{ nota[2] if nota[2] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan soalan.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="hint" class="form-label">Hint</label>
-                        <input type="text" class="form-control" name="hint" id="hint">
+                        <input type="text" class="form-control" name="hint" id="hint" value="{{ nota[4] if nota[4] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan hint untuk soalan.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="d-flex justify-content-center">
@@ -156,61 +162,94 @@
                       </div>
                     </form>
 
-
-                    <!-- Display Add Successful -->
-                    <script>
-                      document.getElementById('submitInventoryButton').addEventListener('click', function (event) {
-                        alert('Maklumat berjaya ditambah.');
-                        // Navigate to another page after successful submission
-                        //window.location.href = '2lecPilihTopik_TambahLatihan.html'; // Replace with your desired page URL
-
-                      });
-                    </script>
-
-                    <!-- Display Add Cancelled -->
-                    <script>
-                      document.getElementById('cancelInventoryButton').addEventListener('click', function () {
-                        alert('Maklumat tidak ditambah. Sila cuba sekali lagi');
-                        // Navigate to another page after canceling the submission
-                        //window.location.href = '../templates/2lecPilihTopik_TambahLatihan.html'; // Replace with your desired page URL
-                      });
-                    </script>
                     <script>
                       const jenisDropdown = document.querySelector('select[name="category"]');
                       const latihanFields = document.querySelectorAll('.latihan-fields');
                       const permainanFields = document.querySelectorAll('.permainan-fields');
                       const namaField = document.querySelector('input[name="filename"]');
                       const descriptionField = document.querySelector('input[name="description"]');
+                      const perkataanField = document.querySelector('input[name="perkataan"]');
+                      const soalanField = document.querySelector('input[name="soalan"]');
+                      const hintField = document.querySelector('input[name="hint"]');
 
+                      // Function to toggle field visibility based on category value
+                      function toggleFieldVisibility(selectedValue) {
+                          if (selectedValue === 'Latihan') {
+                              latihanFields.forEach((field) => {
+                                  field.style.display = 'block';
+                              });
+                              permainanFields.forEach((field) => {
+                                  field.style.display = 'none';
+                              });
+                          } else if (selectedValue === 'Permainan') {
+                              latihanFields.forEach((field) => {
+                                  field.style.display = 'none';
+                              });
+                              permainanFields.forEach((field) => {
+                                  field.style.display = 'block';
+                              });
+                          }
+
+                          // Toggle visibility of Nama and Description fields
+                          if (selectedValue === 'Permainan') {
+                              namaField.style.display = 'none';
+                              descriptionField.style.display = 'none';
+                              perkataanField.required = true;
+                              soalanField.required = true;
+                              hintField.required = true;
+                          } else {
+                              namaField.style.display = 'block';
+                              descriptionField.style.display = 'block';
+                              perkataanField.required = false; // Set to false if not required
+                              soalanField.required = false; // Set to false if not required
+                              hintField.required = false; // Set to false if not required
+                          }
+                      }
+
+                      // Add an event listener to the category dropdown for initial page load
+                      toggleFieldVisibility(jenisDropdown.value);
+
+                      // Add an event listener for the change event of the category dropdown
                       jenisDropdown.addEventListener('change', function () {
-                        const selectedValue = jenisDropdown.value;
-
-                        if (selectedValue === 'Latihan') {
-                          latihanFields.forEach((field) => {
-                            field.style.display = 'block';
-                          });
-                          permainanFields.forEach((field) => {
-                            field.style.display = 'none';
-                          });
-                        } else if (selectedValue === 'Permainan') {
-                          latihanFields.forEach((field) => {
-                            field.style.display = 'none';
-                          });
-                          permainanFields.forEach((field) => {
-                            field.style.display = 'block';
-                          });
-                        }
-
-                        // Toggle visibility of Nama and Description fields
-                        if (selectedValue === 'Permainan') {
-                          namaField.style.display = 'none';
-                          descriptionField.style.display = 'none';
-                        } else {
-                          namaField.style.display = 'block';
-                          descriptionField.style.display = 'block';
-                        }
+                          const selectedValue = jenisDropdown.value;
+                          toggleFieldVisibility(selectedValue);
                       });
+                  </script>
+                    <script>
+                      function validateFile() {
+                        const category = document.getElementById('category').value;
+                        const fileInput = document.getElementById('avatar');
+                        const file = fileInput.files[0];
+                        const allowedFormats = {
+                          'Latihan': ['application/pdf'],
+                        };
+
+                        if (category in allowedFormats) {
+                          const validFormats = allowedFormats[category];
+                          if (!validFormats.includes(file.type)) {
+                            document.getElementById('file-error').textContent = `File format untuk ${category} mesti dalam format: ${validFormats.join(' or ')}`;
+                            fileInput.value = ''; // Clear the file input
+                          } else {
+                            document.getElementById('file-error').textContent = '';
+                          }
+                        }
+                      }
+                      </script>
+                    <script>
+                    function validateForm() {
+                      const selectedTopic = document.getElementById('revenuetype').value;
+
+                      if (selectedTopic === "Sila Pilih" ) {
+                        alert("Sila pilih 'Topik' dan 'Jenis' yang betul.");
+                        return false; // Prevent form submission
+                      }
+
+                      // Add any other validation logic here if needed.
+
+                      return true; // Allow form submission if everything is valid.
+                    }
                     </script>
+
                   </div>
                 </div>
               </div>

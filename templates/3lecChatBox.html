@@ -41,16 +41,16 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="url_for('mainpage')">Silent Math Genius</a></h1>
+        <h1><a href="url_for('lecpage')">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
-          <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
-          <li class="active"><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li class="active"><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -66,10 +66,10 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="url_for('mainpage')"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="url_for('lecpage')"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="{{url_for('mainpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
             <li>Mengenai Kita</li>
           </ol>
         </div>
@@ -86,7 +86,7 @@
           <div class="inner-page">
          <div class="username">
             <div class="mb-3">
-                <label for="username" class="form-label" >Username</label>
+                <label for="username" class="form-label" ></label>
 
 
                 <select id="username" class="form-select" name="username" type="text" onchange="redirectToChatRoom(this)" required>
@@ -112,7 +112,7 @@
                         </li>
                       {% endfor %}
                         {% else %}
-            <li class="no-message-item">No messages yet.</li>
+            <li class="no-message-item" style="color:grey !important">Belum ada message lagi...</li>
         {% endif %}
                       </ul>
                     </div>

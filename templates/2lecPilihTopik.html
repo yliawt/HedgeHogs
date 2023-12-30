@@ -58,7 +58,7 @@
         <ul>
             <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
             <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-            <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+            <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
             <li><a href="{{url_for('profile')}}">Profil</a></li>
             <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
             <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
@@ -76,10 +76,7 @@
           <ol>
             <li><a href="{{url_for('lecpage')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          <ol>
-            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
-            <li>Pemilihan Topik</li>
-          </ol>
+         
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -119,7 +116,7 @@
           </div>
 
         </section><!-- End Activity Section -->
-<hr>
+<hr data-aos="fade-up" data-aos-delay="200">
         <section id="portfolio" class="portfolio">
           
 
@@ -142,7 +139,7 @@
                         <input type="text" name="name" class="form-control" style="height :40px" id="text" placeholder="Pencarian" required>
                       </div>
                       <div class="col-4" >
-                        <button type="submit" class="btn btn-search w-100 d-block"><i class="bi bi-search"></i> Cari</button>
+                        <button type="submit" class="btn btn-search w-100 d-block"><i class="bi bi-search"></i><span> Cari</span></button>
                       </div>
                     </div>
                   </div>

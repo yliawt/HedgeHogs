@@ -54,9 +54,9 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="active"><a href="../templates/1lecIndex.html">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
           <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
-          <li><a href="{{url_for('lecChatBox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
           <li><a href="{{url_for('profile')}}">Profil</a></li>
           <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
           <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
