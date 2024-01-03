@@ -1,0 +1,241 @@
+:root {
+    --color-default: #004643;
+    --color-primary: #001e1d;
+    --color-secondary: #abd1c6;
+  }
+  
+
+body,
+h1,
+h2 {
+    font-family: Ubuntu;
+}
+
+.container {
+    z-index: 1;
+    margin: 20px 120px;
+}
+@media (max-width: 767px) {
+    .container {
+        z-index: 1;
+        margin: 20px 30px;
+    }
+}
+
+/*--------------------------------------------------------------
+# Sections & Section Header
+--------------------------------------------------------------*/
+section {
+    overflow: hidden;
+    padding: 40px 0;
+}
+
+.section-header {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.section-header h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.section-header h2:after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--color-primary);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+}
+
+.section-header p {
+    margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Hero
+--------------------------------------------------------------*/
+.hero {
+    width: 100%;
+    min-height: 100vh;
+    background: url("../img/background1.png") top center;
+    background-size: cover;
+    position: relative;
+    padding: 120px 0;
+    z-index: 3;
+    text-align: center;
+}
+
+
+
+@media (min-width: 1365px) {
+    .hero {
+        background-attachment: fixed;
+    }
+}
+
+.hero h1 {
+    font-size: 9vmin;
+    font-weight: 800;
+    color: white;
+}
+
+.hero h2 {
+    font-size: 4vmin;
+    color: var(--color-secondary);
+}
+
+body,
+html {
+    height: 100%;
+
+}
+
+.hero .learn-math-button {
+    background-color: #f3b53a;
+    color: black;
+    padding: 10px 40px;
+    font-size: 3vmin;
+    transition: opacity 0.3s;
+    border-radius: 35px;
+    text-decoration: none;
+}
+
+.hero .learn-math-button:hover {
+    opacity: 0.5;
+}
+
+/*--------------------------------------------------------------
+# Features Section
+--------------------------------------------------------------*/
+.features {
+    padding-bottom: 0;
+    background-color: #abd1c6;
+}
+
+.features h1 {
+    font-size: 9vmin;
+    font-weight: 800;
+    text-align: center;
+    color:var(color-secondary);
+
+}
+
+.features h3 {
+    color: var(--color-default);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+
+.features .details {
+    padding: 50px 0;
+    background-color: #f7f9fc;
+}
+
+.features .details h4 {
+    color: var(--color-default);
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.features .details p {
+    margin-bottom: 20px;
+    font-size: 25px;
+}
+
+#features .details .row {
+    margin-top: 100px;
+    /* Adjust top margin as needed */
+    margin-bottom: 20px;
+    /* Adjust bottom margin as needed */
+    /* Add any other styling properties you want for the row */
+}
+/* Styles for the otw-img class */
+.otw-img {
+    width: 80%; /* Set the width to 100% to make the image responsive within its container */
+  
+}
+
+
+/* Base styles for medium-sized screens and larger */
+.col-md-6 {
+    width: 65%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.col-md-6 img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+
+}
+
+
+/* Responsive styles for smaller screens */
+@media (max-width: 767px) {
+    .features h1 {
+        font-size: 9vmin;
+        font-weight: 800;
+        text-align: center;
+    
+    }
+    .features .details p {
+        margin-bottom: 20px;
+        font-size: 14px;
+    }
+    .col-md-6 {
+        width: 100%;
+        /* Make the column full-width on smaller screens */
+    }
+
+    .col-md-6 img {
+
+        border-radius: 10px;
+    }
+
+    #features .details .row {
+        margin-top: 40px;
+        /* Adjust top margin as needed */
+        margin-bottom: 20px;
+        /* Adjust bottom margin as needed */
+        /* Add any other styling properties you want for the row */
+    }
+}
+
+
+/*--------------------------------------------------------------
+# Footer
+--------------------------------------------------------------*/
+.footer {
+    font-size: 14px;
+  }
+
+  
+  .footer .footer-legal {
+    background: #fff;
+    padding: 30px 0;
+  }
+  
+  .footer .footer-legal .copyright {
+    text-align: center;
+    color: var(--color-default);
+  }
+  
+  .footer .footer-legal .credits {
+    padding-top: 4px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--color-default);
+  }

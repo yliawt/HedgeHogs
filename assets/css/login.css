@@ -58,7 +58,11 @@ input {
   grid-template-columns: 1fr;
   z-index: 5;
 }
-
+.error-message{
+    display: inline-block; /* Display as an inline element */
+    color: red; /* Set the text color to red (you can adjust the color as needed) */
+    white-space: nowrap; /* Prevent line breaks */
+}
 form {
   display: flex;
   align-items: center;
