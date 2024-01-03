@@ -53,6 +53,63 @@ def lecpage():
 def materials():
     return render_template('2lecPilihTopik.html')
 
+from flask import jsonify
+
+@app.route('/search', methods=["POST"])
+def search():
+    search_query = request.form.get('search')  # Retrieve the 'name' field from the form
+    print(search_query)
+    cur = mysql.connection.cursor()
+    cur.execute("SELECT topic, category, filename FROM materials WHERE topic LIKE %s OR category LIKE %s OR filename LIKE %s ORDER BY topic ASC",
+                ('%' + search_query + '%', '%' + search_query + '%', '%' + search_query + '%'))
+    results = list(cur.fetchall())  # Convert the tuple to a list
+    cur.close()
+
+    updated_results = []  # Initialize an empty list to store updated results
+
+    for result in results:
+        result_list = list(result)  # Convert the tuple to a list
+        if result_list[0] == "Perpuluhan":
+            if result_list[1] == "Peta Minda":
+                result_list.append("/perpuluhan/nota_minda")
+            elif result_list[1] == "PDF":
+                result_list.append("/perpuluhan/nota_pdf")
+            elif result_list[1] == "Video":
+                result_list.append("/perpuluhan/nota_video")
+            elif result_list[1] == "Gerbang Kata":
+                result_list.append("/perpuluhan/nota_kata")
+            elif result_list[1] == "Latihan":
+                result_list.append("/perpuluhan/latihan_link")
+        elif result_list[0] == "Tingkatan 3: Matematik Pengguna I":
+            if result_list[1] == "Peta Minda":
+                result_list.append("/tingkatan3/nota_minda")
+            elif result_list[1] == "PDF":
+                result_list.append("/tingkatan3/nota_pdf")
+            elif result_list[1] == "Video":
+                result_list.append("/tingkatan3/nota_video")
+            elif result_list[1] == "Gerbang Kata":
+                result_list.append("tingkatan3/nota_kata")
+            elif result_list[1] == "Latihan":
+                result_list.append("/tingkatan3/latihan_link")
+        elif result_list[0] == "Tingkatan 4: Matematik Pengguna II":
+            if result_list[1] == "Peta Minda":
+                result_list.append("/tingkatan4/nota_minda")
+            elif result_list[1] == "PDF":
+                result_list.append("/tingkatan4/nota_pdf")
+            elif result_list[1] == "Video":
+                result_list.append("/tingkatan4/nota_video")
+            elif result_list[1] == "Gerbang Kata":
+                result_list.append("/tingkatan4/nota_kata")
+            elif result_list[1] == "Latihan":
+                result_list.append("/tingkatan4/latihan_link")
+        updated_results.append(result_list)  # Append the updated list to the new list
+
+    # If you need the updated_results as a tuple again, you can convert it back
+    updated_results_tuple = tuple(updated_results)
+
+    return jsonify(updated_results_tuple)
+
+
 
 @app.route('/lecChatBox')
 def lecchatbox():
@@ -366,7 +423,7 @@ def tingkatan3_latihan():
     return render_template('T3_pilihLatihan.html',role=role)
 
 
-@app.route('/Tingkatan3/latihan_link')
+@app.route('/tingkatan3/latihan_link')
 def tingkatan3_latihan_link():
     role = session.get("role")
     cur = mysql.connection.cursor()
