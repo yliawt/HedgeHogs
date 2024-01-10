@@ -39,8 +39,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
-
 </head>
 
 <body>
@@ -77,14 +75,13 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="{{url_for('perpuluhan_nota')}}"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('tingkatan3')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
             <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
             <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
-            <li><a href="{{url_for('perpuluhan')}}">Perpuluhan</a></li>
-            <li><a href="{{url_for('perpuluhan_nota')}}">Nota</a></li>
-            <li>Nota Peta</li>
+            <li><a href="{{url_for('tingkatan3')}}">Tingkatan 3</a></li>
+            <li>Latihan</li>
           </ol>
         </div>
       </div>
@@ -99,15 +96,35 @@
           <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-              <h1>NOMBOR PERPULUHAN</h1>
+              <h1>MATEMATIK PENGUNA I:<br>SIMPANAN DAN PELABURAN, KREDIT DAN HUTANG</h1>
+              <hr>
+
             </div>
-            <div class="image-gallery">
-              {% for encoded_image in encoded_images %}
-                <div class="image-container">
-                  <img src="data:image/png;base64,{{ encoded_image }}" alt="Image">
-                </div>
-              {% endfor %}
-             </div>
+
+            <div class="row">
+
+              <!-- Container 1 -->
+              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
+                <a href="{{url_for('tingkatan3_latihan_link')}}" style="text-decoration: none; color: inherit;">
+                  <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
+                    <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                    <h4 class="title">Contoh Latihan</h4>
+                    <p class="description">PDF dan Jawapan</p>
+                  </div>
+                </a>
+              </div>
+
+              <!-- Container 2 -->
+              <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
+                <a href="{{url_for('tingkatan3_latihan_game')}}" style="text-decoration: none; color: inherit;">
+                  <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
+                    <div class="icon"><i class="bx bx-file"></i></div>
+                    <h4 class="title">Permainan</h4>
+                    <p class="description">Memilih jawapan yang betul</p>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
         </section><!-- End Services Section -->
 

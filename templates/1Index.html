@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Vesperr Bootstrap Template - Index</title>
+  <title>Silent Math Genius</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -28,8 +28,6 @@
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
 
-
-
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
 
@@ -49,21 +47,20 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
-
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="active"><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
-        </ul>
+            <li class="active"><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('stdmaterial')}}">Bahan Pembelajaran</a></li>
+            <li><a href="{{url_for('chatbox')}}">Chatbox</a></li>
+            <li><a href="{{url_for('profile')}}">Profil</a></li>
+            <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+            <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
+          </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
@@ -76,18 +73,17 @@
     <div class="container">
       <div class="row">
 
-
         <div class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <div class="row">
             <h1 data-aos="fade-up" style="color: #edc764;">Silent Math <br>Genius</h1>
 
 
-            <h2 data-aos="fade-up" data-aos-delay="400" style="color: white;">Hi username!<br></h2>
+            <h2 data-aos="fade-up" data-aos-delay="400" style="color: white;">Hi {{name}}<br></h2>
             <h2 data-aos="fade-up" data-aos-delay="600" style="color: white;"> Kami menjamin melalui laman web ini, anda boleh mempelajari Matematik dengan 
               <span id="typed"class="typed"data-typed-items="interaktif, gembira, seronok, bermain, latihan, bersungguh-sungguh" style="color:#f3b53a"></span>
             </h2>
             <div data-aos="fade-up" data-aos-delay="800">
-              <a href="../templates/2pilihTopik.html" class="btn-get-started scrollto" style="color: white ;">Jom
+              <a href="{{url_for('stdmaterial')}}" class="btn-get-started scrollto" style="color: white ;">Jom
                 Mulakan!</a>
             </div>
           </div>

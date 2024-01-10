@@ -47,20 +47,20 @@
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo">
-        <h1><a href="../templates/1lecIndex.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2lecpilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
-        </ul>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+            <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+            <li><a href="{{url_for('profile')}}">Profil</a></li>
+            <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+            <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
+          </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
@@ -72,13 +72,7 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/2lecPilihTopik_TambahKuiz.html"><i class="bi bi-arrow-left"></i></a></li>
-          </ol>
-          <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li><a href="../templates/2lecPilihTopik.html">Tambah Kuiz</a></li>
-            <li><a href="../templates/2lecPilihTopik_TambahKuiz.html">Kuiz Sedia Ada</a></li>
-            <li>Laman Tambah Kuiz</li>
+            <li><a href="{{url_for('upload_kuiz')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
           </ol>
         </div>
       </div>
@@ -92,7 +86,11 @@
         <section id="portfolio" class="portfolio">
 
           <div class="section-title" data-aos="fade-up">
-            <h1>Tambah Soalan Kuiz</h1>
+            {% if action == 'modify' %}
+              <h1>Kemas Kini Soalan Kuiz</h1>
+            {% else %}
+              <h1>Tambah Soalan Kuiz</h1>
+            {% endif %}
           </div>
           <div class="container-fluid" data-aos="fade-up" data-aos-delay="200">
 
@@ -101,54 +99,55 @@
                 <div class="card w-100">
                   <div class="card-body p-4">
 
-                    <form method="get">
+                    <form action="{% if action == 'modify' %}{{ url_for('update_quiz', name=quiz[1]) }}{% else %}{{ url_for('upload_quiz') }}{% endif %}" method="POST">
 
                       <div class="mb-3 row">
                         <div class="col-6">
                           <label for="revenuetype" class="form-label">Topik</label>
-                          <select id="revenuetype" class="form-select" type="text" required>
-                            <option>Sila Pilih</option>
-                            <option>Perpuluhan</option>
-                            <option>Tingkatan 3: Matematik Pengguna I</option>
-                            <option>Tingkatan 4: Matematik Pengguna II</option>
+                          <select id="revenuetype" class="form-select" name="topic" required oninvalid="this.setCustomValidity('Sila pilih satu topik.')" oninput="this.setCustomValidity('')">
+                              <option value="" disabled selected>Sila Pilih</option>
+                              <option {% if quiz[0] == 'Perpuluhan' %}selected{% endif %}>Perpuluhan</option>
+                              <option {% if quiz[0] == 'Tingkatan 3: Matematik Pengguna I' %}selected{% endif %}>Tingkatan 3: Matematik Pengguna I</option>
+                              <option {% if quiz[0] == 'Tingkatan 4: Matematik Pengguna II' %}selected{% endif %}>Tingkatan 4: Matematik Pengguna II</option>
                           </select>
                         </div>
                       </div>
 
                       <div class="mb-3">
                         <label for="type" class="form-label">Soalan</label>
-                        <input type="text" class="form-control" id="type" required>
+                        <input type="text" class="form-control" name="soalan" id="type" required value="{{ quiz[1] if quiz[1] is not none else '' }}" oninvalid="this.setCustomValidity('Sila masukkan soalan kuiz.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="mb-3 row">
                         <div class="col-6">
                           <label for="type" class="form-label">Pilihan 1</label>
-                          <input type="text" class="form-control" id="type" required>
+                          <input type="text" class="form-control" name="pilihan1" id="type" required value="{{ quiz[2] if quiz[2] is not none else '' }}" oninvalid="this.setCustomValidity('Sila masukkan pilihan1.')" oninput="this.setCustomValidity('')">
                         </div>
                         <div class="col-6">
                           <label for="type" class="form-label">Pilihan 2</label>
-                          <input type="text" class="form-control" id="type" required>
+                          <input type="text" class="form-control" name="pilihan2" id="type" required value="{{ quiz[3] if quiz[3] is not none else '' }}" oninvalid="this.setCustomValidity('Sila masukkan pilihan 2.')" oninput="this.setCustomValidity('')">
                         </div>
                       </div>
 
                         <div class="mb-3 row">
                           <div class="col-6">
                             <label for="type" class="form-label">Pilihan 3</label>
-                            <input type="text" class="form-control" id="type" required>
+                            <input type="text" class="form-control" name="pilihan3" id="type" required value="{{ quiz[4] if quiz[4] is not none else '' }}" oninvalid="this.setCustomValidity('Sila masukkan pilihan 3.')" oninput="this.setCustomValidity('')">
                           </div>
                           <div class="col-6">
                             <label for="type" class="form-label">Pilihan 4</label>
-                            <input type="text" class="form-control" id="type" required>
+                            <input type="text" class="form-control" name="pilihan4" id="type" required value="{{ quiz[5] if quiz[5] is not none else '' }}" oninvalid="this.setCustomValidity('Sila masukkan pilihan 4.')" oninput="this.setCustomValidity('')">
                           </div>
                         </div>
 
                         <div class="col-6">
                           <label for="revenuetype" class="form-label">Jawapan</label>
-                          <select id="revenuetype" class="form-select" type="text" required>
-                            <option>Pilihan 1</option>
-                            <option>Pilihan 2</option>
-                            <option>Pilihan 3</option>
-                            <option>Pilihan 4</option>
+                          <select id="revenuetype" class="form-select" name="jawapan" type="text" required oninvalid="this.setCustomValidity('Sila pilih satu pilihan sebagai jawapan.')" oninput="this.setCustomValidity('')">
+                            <option value="" disabled selected>Sila Pilih</option>
+                            <option value="a" {% if quiz[6] == 'a' %}selected{% endif %}>Pilihan 1</option>
+                            <option value="b" {% if quiz[6] == 'b' %}selected{% endif %}>Pilihan 2</option>
+                            <option value="c" {% if quiz[6] == 'c' %}selected{% endif %}>Pilihan 3</option>
+                            <option value="d" {% if quiz[6] == 'd' %}selected{% endif %}>Pilihan 4</option>
                           </select>
                         </div>
 
@@ -156,33 +155,14 @@
                         <div class="d-flex justify-content-center">
                           <a>
                             <button type="submit" class="btn btn-primary" id="submitInventoryButton"
-                              style="width: 300px; margin: 10px;">Simpan</button>
+                             >Simpan</button>
                           </a>
                           <a>
                             <button type="button" class="btn btn-outline-primary" id="cancelInventoryButton"
-                              style="width: 300px; margin: 10px;">Batal</button>
+                             >Batal</button>
                           </a>
                         </div>
                     </form>
-
-                    <!-- Display Add Successful -->
-                    <script>
-                      document.getElementById('submitInventoryButton').addEventListener('click', function (event) {
-                        event.preventDefault(); // Prevent the form from submitting for demo purposes
-                        alert('Maklumat berjaya ditambah.');
-                        // Navigate to another page after successful submission
-                        window.location.href = '../templates/2lecPilihTopik_TambahKuiz.html'; // Replace with your desired page URL
-                      });
-                    </script>
-
-                    <!-- Display Add Cancelled -->
-                    <script>
-                      document.getElementById('cancelInventoryButton').addEventListener('click', function () {
-                        alert('Maklumat tidak ditambah. Sila cuba sekali lagi');
-                        // Navigate to another page after canceling the submission
-                        window.location.href = '../templates/2lecPilihTopik_TambahKuiz.html'; // Replace with your desired page URL
-                      });
-                    </script>
 
                   </div>
                 </div>

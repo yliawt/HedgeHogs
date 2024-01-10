@@ -18,53 +18,55 @@
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="../templates/1Index.html" class="sign-in-form">
+        <form action="{{url_for('login')}}" method = "POST" class="sign-in-form">
           <img src="../assets/img/logo-nobg.png" style="max-width: 200px;" class="image" alt="" />
           <h2 class="title">Daftar Masuk</h2>
-
-
-          
           <div class="input-field">
             <i class="fas fa-list"></i> <!-- Assuming you have an icon for the dropdown -->
-            <select class="form-select" required>
-              <option value="option1">Pelajar</option>
-              <option value="option2">Guru</option>
+            <select class="form-select" required name="option">
+              <option value="Pelajar">Pelajar</option>
+              <option value="Guru">Guru</option>
             </select>
           </div>
-          
-
-          
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="id pengguna" placeholder="ID Pengguna" required />
+            <input type="text" name="id" placeholder="ID Pengguna" required />
           </div>
+
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="katalaluan" placeholder="Kata Laluan" required />
+            <input type="password" name="password" placeholder="Kata Laluan" required />
           </div>
+         <!-- Add this section to display flash messages -->
+        <div class="flash-messages" style="color: red;">
+            {% if session.get('flash_message') %}
+                <div class="flash">
+                    {{ get_flashed_messages()[0] }}
+                </div>
+            {% endif %}
+        </div>
           <input type="submit" value="Daftar Masuk" class="btn solid" />
-
-
         </form>
-        <form action="../templates/1Index.html" class="sign-up-form">
+
+        <form action="{{url_for('signup')}}" method = "POST" class="sign-up-form" onsubmit="return validatePassword() && validateForm()">
           <img src="../assets/img/logo-nobg.png" style="max-width: 200px;" class="image" alt="" />
           <h2 class="title">Daftar Baharu</h2>
           <h5>Pendaftaran akaun baharu hanya untuk pelajar sahaja</h5>
+
           <div class="input-field">
             <i class="fas fa-user"></i>
-            <input type="idpengguna" placeholder="ID Pengguna" required />
+            <input type="text" id="id" name="id" placeholder="ID Pengguna" required />
+            <span id="error-message" class="error-message"></span>
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="emel" placeholder="Kata Laluan" required />
+            <input type="password" id="password" name="password" placeholder="Kata Laluan" required />
           </div>
           <div class="input-field">
             <i class="fas fa-lock"></i>
-            <input type="kata laluan" placeholder="Pengesahan Kata Laluan" required />
+            <input type="password" id="confirm_password" placeholder="Pengesahan Kata Laluan" required />
           </div>
           <input type="submit" class="btn" value="Daftar Masuk" />
-
-
         </form>
       </div>
     </div>
@@ -111,6 +113,36 @@
     });
 
   </script>
+<script>
+    function validatePassword() {
+        var password = document.getElementById("password").value;
+        var confirm_Password = document.getElementById("confirm_password").value;
+
+        if (password !== confirm_Password) {
+            alert("Kata Laluan dan Pengesahan Kata Laluan tidak sama!");
+            return false; // Prevent form submission
+        }
+        return true; // Allow form submission
+    }
+</script>
+
+<script>
+    var idList = {{ idlist | tojson | safe }};
+
+    function validateForm() {
+        var enteredId = document.getElementById("id").value;
+        console.log("Entered ID: " + enteredId);
+        console.log("ID List: " + JSON.stringify(idList));
+        // Check if entered ID exists in the idList
+        if (idList.includes(enteredId)) {
+            document.getElementById("error-message").innerHTML = "ID sudah daftar dalam sistem. Sila pilih ID yang lain.";
+            return false; // Prevent form submission
+        } else {
+            return true; // Allow form submission
+        }
+    }
+</script>
+
 </body>
 
 </html>

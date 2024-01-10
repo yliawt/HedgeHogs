@@ -50,19 +50,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li class="active"><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Bahan Pembelajaran</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('chatbox') }}{% else %}{{ url_for('lecchatbox') }}{% endif %}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,16 +77,15 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/T4_latihan_pilihJenis.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('tingkatan4_latihan')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li><a href="../templates/2pilihTopik.html">Pemilihan Topik</a></li>
-            <li><a href="../templates/T4_pilihAkitiviti.html">Pemilihan Aktiviti</a></li>
-            <li><a href="../templates/T4_latihan_pilihJenis.html">Pemilihan Latihan</a></li>
-            <li>Link untuk Latihan</li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
+            <li><a href="{{url_for('tingkatan4')}}">Tingkatan 4</a></li>
+            <li><a href="{{url_for('tingkatan4_latihan')}}">Latihan</li>
+            <li>Contoh Latihan</li>
           </ol>
-
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -105,15 +104,11 @@
             </div>
 
             <div class="row" data-aos="fade-up" data-aos-delay="200">
-
               <body>
-                <p>01. <a href="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf"> Latihan 1</a>.</p>
-                <p>02. <a href="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf"> Latihan 2</a>.</p>
-                <p>03. <a href="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf"> Latihan 3</a>.</p>
-                <p>04. <a href="/uploads/media/default/0001/01/540cb75550adf33f281f29132dddd14fded85bfc.pdf"> Latihan 4</a>.</p>
+                {% for material in materials %}
+                  <p>{{ loop.index }}. <a href="{{ url_for('serve_latihan', filename=material[0]) }}" target="_blank">{{ material[0] }}</a>.</p>
+               {% endfor %}
               </body>
-
-
             </div>
 
           </div>

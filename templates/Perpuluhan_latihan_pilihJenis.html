@@ -48,19 +48,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li class="active"><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Bahan Pembelajaran</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('chatbox') }}{% else %}{{ url_for('lecchatbox') }}{% endif %}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -74,15 +74,15 @@
     <section class="breadcrumbs">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
-          <ol>
-            <li><a href="../templates/Perpuluhan_pilihAkitiviti.html"><i class="bi bi-arrow-left"></i></a></li>
-          </ol>
-          <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li><a href="../templates/2pilihTopik.html">Pemilihan Topik</a></li>
-            <li><a href="../templates/Perpuluhan_pilihAkitiviti.html">Pemilihan Aktiviti</a></li>
-            <li>Pemilihan Latihan</li>  
-          </ol>
+        <ol>
+          <li><a href="{{url_for('perpuluhan')}}"><i class="bi bi-arrow-left"></i></a></li>
+        </ol>
+        <ol>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
+          <li><a href="{{url_for('perpuluhan')}}">Perpuluhan</a></li>
+          <li>Latihan</li>
+        </ol>
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -104,7 +104,7 @@
 
               <!-- Container 1 -->
               <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
-                <a href="../templates/Perpuluhan_latihan_link.html" style="text-decoration: none; color: inherit;">
+                <a href="{{url_for('perpuluhan_latihan_link')}}" style="text-decoration: none; color: inherit;">
                   <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
                     <div class="icon"><i class="bx bxl-dribbble"></i></div>
                     <h4 class="title">Contoh Latihan</h4>
@@ -115,7 +115,7 @@
 
               <!-- Container 2 -->
               <div class="col-md-6 col-lg-6  align-items-stretch mb-5 mb-lg-0">
-                <a href="../templates/Perpuluhan_latihan_game.html" style="text-decoration: none; color: inherit;">
+                <a href="{{url_for('perpuluhan_latihan_game')}}" style="text-decoration: none; color: inherit;">
                   <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
                     <div class="icon"><i class="bx bx-file"></i></div>
                     <h4 class="title">Permainan</h4>

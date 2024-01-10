@@ -19,12 +19,21 @@
           <p class="wrong-letter">Wrong letters: <span></span></p>
         </div>
         <button class="btn retry">Sekali Lagi</button>
-        <a href="../templates/T3_latihan_pilihJenis.html"> <button class="btn return">Kembali Website</button></a>
+        <a href="{{url_for('tingkatan3_latihan')}}"> <button class="btn return">Kembali Website</button></a>
       </div>
     </div>
 
-    <script src="../assets/js/LatihanGuessingWordList.js"></script>
+    <script>
+      // Create a JavaScript array of word objects using data from the 'game' variable
+      let wordList = [
+        {% for game in game %}
+        {
+          word: "{{ game[0] }}",
+          hint: "{{ game[1] }}"
+        },
+        {% endfor %}
+      ];
+    </script>
     <script src="../assets/js/LatihanGuessingWordScript.js"></script>
-
   </body>
 </html>

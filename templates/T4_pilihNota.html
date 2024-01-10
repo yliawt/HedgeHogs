@@ -39,8 +39,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
-
 </head>
 
 <body>
@@ -73,22 +71,21 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
-        <div class="d-flex justify-content-between align-items-center">
-          <ol>
-            <li><a href="{{url_for('perpuluhan_nota')}}"><i class="bi bi-arrow-left"></i></a></li>
-          </ol>
-          <ol>
-            <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
-            <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
-            <li><a href="{{url_for('perpuluhan')}}">Perpuluhan</a></li>
-            <li><a href="{{url_for('perpuluhan_nota')}}">Nota</a></li>
-            <li>Nota Peta</li>
-          </ol>
-        </div>
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <ol>
+          <li><a href="{{url_for('tingkatan4')}}"><i class="bi bi-arrow-left"></i></a></li>
+        </ol>
+        <ol>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
+          <li><a href="{{url_for('tingkatan4')}}">Tingkatan 4</a></li>
+          <li>Nota</li>
+        </ol>
       </div>
-    </section><!-- End Breadcrumbs Section -->
+    </div>
+  </section><!-- End Breadcrumbs Section -->
 
     <section class="inner-page">
       <div class="container">
@@ -99,21 +96,63 @@
           <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-              <h1>NOMBOR PERPULUHAN</h1>
+              <h1>MATEMATIK PENGUNA I:<br>SIMPANAN DAN PELABURAN, KREDIT DAN HUTANG</h1>
+           <hr>
             </div>
-            <div class="image-gallery">
-              {% for encoded_image in encoded_images %}
-                <div class="image-container">
-                  <img src="data:image/png;base64,{{ encoded_image }}" alt="Image">
-                </div>
-              {% endfor %}
-             </div>
-          </div>
-        </section><!-- End Services Section -->
+
+           <div class="row">
+
+                  <!-- Container 1 -->
+                  <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan4_nota_minda')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box1" data-aos="fade-up" data-aos-delay="100">
+                              <div class="icon"><i class="bx bxl-dribbble"></i></div>
+                              <h4 class="title">Nota Minda</h4>
+                              <p class="description">Bubble Map, Tree Diagram dan lain-lain</p>
+                          </div>
+                      </a>
+                  </div>
+              
+                  <!-- Container 2 -->
+                  <div class="col-md-6 col-lg-3  align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan4_nota_pdf')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box2" data-aos="fade-up" data-aos-delay="200">
+                              <div class="icon"><i class="bx bx-file"></i></div>
+                              <h4 class="title">Nota</h4>
+                              <p class="description">Nota PDF yang menarik dan berilmu</p>
+                          </div>
+                      </a>
+                  </div>
+              
+                  <!-- Container 3 -->
+                  <div class="col-md-6 col-lg-3 align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan4_nota_video')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box3" data-aos="fade-up" data-aos-delay="300">
+                              <div class="icon"><i class="bx bx-tachometer"></i></div>
+                              <h4 class="title">Video</h4>
+                              <p class="description">Video dengan animasi dan pelbagai</p>
+                          </div>
+                      </a>
+                  </div>
+              
+                  <!-- Container 4 -->
+                  <div class="col-md-6 col-lg-3  align-items-stretch mb-5 mb-lg-0">
+                      <a href="{{url_for('tingkatan4_nota_kata')}}" style="text-decoration: none; color: inherit;">
+                          <div class="icon-box box4" data-aos="fade-up" data-aos-delay="400">
+                              <div class="icon"><i class="bx bx-world"></i></div>
+                              <h4 class="title">Gerbang Kata</h4>
+                              <p class="description">Kata kunci dan maksud serta gambar rajah</p>
+                          </div>
+                      </a>
+                  </div>
+              </div>
+              </div>
+
+    </section><!-- End Services Section -->
 
 
 
-      </div>
+    </div>
     </section>
 
   </main><!-- End #main -->

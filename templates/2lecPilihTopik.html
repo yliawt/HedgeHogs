@@ -49,20 +49,20 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1lecIndex.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2lecpilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
-        </ul>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+            <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+            <li><a href="{{url_for('profile')}}">Profil</a></li>
+            <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+            <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
+          </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
     </div>
@@ -74,12 +74,9 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/1lecIndex.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('lecpage')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
-          <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li>Pemilihan Topik</li>
-          </ol>
+         
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -96,21 +93,21 @@
 
           <div class="row" data-aos="fade-up" data-aos-delay="200">
             <div class="col-4">
-              <a href="../templates/2lecPilihTopik_TambahNota.html">
+              <a href="{{url_for('upload_note')}}">
                 <div class="activityBox viewNota">
                   <h5> <i class="bi-eye" style="padding: 10px;"></i>Muatnaik Nota</h5>
                 </div>
               </a>
             </div>
             <div class="col-4">
-              <a href="../templates/2lecPilihTopik_TambahLatihan.html">
+              <a href="{{url_for('upload_exercise')}}">
                 <div class="activityBox viewLatihan">
                   <h5> <i class="bi-eye" style="padding: 10px;"></i>Muatnaik Latihan</h5>
                 </div>
               </a>
             </div>
             <div class="col-4">
-              <a href="../templates/2lecPilihTopik_TambahKuiz.html">
+              <a href="{{url_for('upload_kuiz')}}">
                 <div class="activityBox viewKuiz">
                   <h5> <i class="bi-eye" style="padding: 10px;"></i>Muatnaik Kuiz</h5>
                 </div>
@@ -119,7 +116,7 @@
           </div>
 
         </section><!-- End Activity Section -->
-<hr>
+<hr data-aos="fade-up" data-aos-delay="200">
         <section id="portfolio" class="portfolio">
           
 
@@ -135,18 +132,39 @@
 
             <div class="col-lg-12 d-flex justify-content-center">
               <div class="search-container text-center" >
-                <form method="post" role="form" class="php-email-form mx-auto">
+                <form action="{{url_for('search')}}" method="post" role="form" class="php-email-form mx-auto">
                   <div class="form-group">
                     <div class="row">
                       <div class="col-8" style="margin-bottom: 5px;">
                         <input type="text" name="name" class="form-control" style="height :40px" id="text" placeholder="Pencarian" required>
                       </div>
                       <div class="col-4" >
-                        <button type="submit" class="btn btn-search w-100 d-block"><i class="bi bi-search"></i> Cari</button>
+                        <button type="submit" class="btn btn-search w-100 d-block" onclick="showItemPanel()"><i class="bi bi-search"></i><span> Cari</span></button>
                       </div>
                     </div>
                   </div>
                 </form>
+                <div id="searchList" class="searchList">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Topik</th>
+                        <th scope="col">Name File</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for result in search_results %}
+                      <tr>
+                        <td>{{ result[0] }}</td>
+                        <td><a href="{{ result[3] }}">{{ result[3] }}></a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                  <div class="col-4">
+                    <button id="closeButton" type="button" onclick="closeItemList()">Tutup</button>
+                  </div>
+                </div>
               </div>
         </div>
 
@@ -156,7 +174,7 @@
           <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="400">
             <div class="col-lg-4 col-md-6 portfolio-item mini">
               <div class="portfolio-wrap">
-                <a href="../templates/Perpuluhan_pilihAkitiviti.html">
+                <a href="{{url_for('perpuluhan')}}">
                   <img src="../assets/img/moreservice1.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
                     <h4>Perpuluhan</h4>
@@ -167,7 +185,7 @@
             </div>
 
             <div class="col-lg-4 col-md-6 portfolio-item t3">
-              <a href="..//templates/T3_pilihAkitiviti.html">
+              <a href="{{url_for('tingkatan3')}}">
                 <div class="portfolio-wrap">
                   <img src="../assets/img/moreservice2.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
@@ -180,7 +198,7 @@
 
             <div class="col-lg-4 col-md-6 portfolio-item t4">
               <div class="portfolio-wrap">
-                <a href="../templates/T4_pilihAkitiviti.html">
+                <a href="{{url_for('tingkatan4')}}">
                   <img src="../assets/img/moreservice3.jpg" class="img-fluid" alt="">
                   <div class="portfolio-info">
                     <h4>Matematik Pengguna II</h4>
@@ -213,6 +231,86 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
+<script>
+function showItemPanel() {
+  // Remove the previous search results if any
+  var itemList = document.getElementById('searchList');
+  itemList.style.display = "block";
+  itemList.innerHTML = "";
+
+  // Make an AJAX request to the server to fetch search results
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "{{url_for('search')}}", true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  var searchQuery = document.getElementById('text').value;
+  console.log("searchQuery:", searchQuery); // Debugging statement
+  var data = "search=" + searchQuery;
+  console.log("data:", data); // Debugging statement
+
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      // Parse the JSON response (assuming your server sends JSON)
+      var response = JSON.parse(xhr.responseText);
+
+      // Process and display the search results as a table
+      var itemList = document.getElementById('searchList');
+      var table = document.createElement('table');
+      table.className = 'table table-hover'; // Add Bootstrap table class
+
+      // Create table header
+      var thead = document.createElement('thead');
+      var headerRow = document.createElement('tr');
+      var header1 = document.createElement('th');
+      header1.textContent = 'Topik';
+      var header2 = document.createElement('th');
+      header2.textContent = 'Name File';
+      headerRow.appendChild(header1);
+      headerRow.appendChild(header2);
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      // Create table body
+      var tbody = document.createElement('tbody');
+
+      for (var i = 0; i < response.length; i++) {
+          var row = document.createElement('tr');
+          var cell1 = document.createElement('td');
+          var cell2 = document.createElement('td');
+
+          cell1.textContent = response[i][0];
+
+          // Create a link for the "Name File" column
+          var link = document.createElement('a');
+          link.href = response[i][3];  // Assuming response[i][2] contains the URL
+          link.textContent = response[i][2];
+          cell2.appendChild(link);
+
+          row.appendChild(cell1);
+          row.appendChild(cell2);
+          tbody.appendChild(row);
+      }
+
+      table.appendChild(tbody);
+      itemList.appendChild(table);
+
+      // Add a close button to hide the table
+      var closeButton = document.createElement('button');
+      closeButton.textContent = 'Tutup';
+      closeButton.type = 'button';
+      closeButton.onclick = closeItemList;
+      itemList.appendChild(closeButton);
+    }
+  };
+
+  xhr.send(data);
+}
+
+function closeItemList() {
+  var itemList = document.getElementById('searchList');
+  itemList.style.display = "none";  // Set the display property to "none"
+}
+</script>
 
 </body>
 

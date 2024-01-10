@@ -50,19 +50,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+          <li class="active"><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Bahan Pembelajaran</a></li>
+          <li><a href="{% if role == 'Pelajar' %}{{ url_for('chatbox') }}{% else %}{{ url_for('lecchatbox') }}{% endif %}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -77,16 +77,14 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/T4_pilihAkitiviti.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('tingkatan4')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="../templates/1Index.html">Laman Utama</a></li>
-            <li><a href="../templates/2pilihTopik.html">Pemilihan Topik</a></li>
-            <li><a href="../templates/T4_pilihAkitiviti.html">Pemilihan Aktiviti</a></li>
-
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
+            <li><a href="{{url_for('tingkatan4')}}">Tingkatan 4</a></li>
             <li>Kuiz</li>
           </ol>
-
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -104,10 +102,10 @@
               <h2>Kuiz</h2>
             </div>
 
-            <div class="row" data-aos="fade-up" data-aos-delay="200">
-       
- <!--题目在main.js 里面-->
+            <div class="row" data-aos="fade-up" data-aos-delay="200"></div>
+              <!--题目在main.js 里面-->
               <div class="containering">
+                <input type="hidden" id="quiz-category" value="tingkatan4">
                 <div class="col">
                   <h3 id="questionBox">
                     1) Lorem ipsum dolor sit amet, consectetur adipisicing elit Debitis?
@@ -133,7 +131,6 @@
               </div>
               
             </div>
-          </div>
         </section><!-- End Services Section -->
 
       </div>
@@ -153,6 +150,20 @@
   <script src="../assets/vendor/php-email-form/validate.js"></script>
 
   <!-- Template Main JS File -->
+  <script>
+    var quizData = [
+      {% for question in quiz %}
+      {
+        question: "{{ question[0] }}",
+        a: "{{ question[1] }}",
+        b: "{{ question[2] }}",
+        c: "{{ question[3] }}",
+        d: "{{ question[4] }}",
+        correct: "{{ question[5] }}"
+      },
+      {% endfor %}
+    ];
+  </script>
   <script src="../assets/js/main.js"></script>
 
 </body>

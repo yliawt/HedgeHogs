@@ -81,19 +81,19 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <h1><a href="../templates/1Index.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1Index.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2pilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -108,13 +108,9 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/2lecPilihTopik.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('materials')}}"><i class="bi bi-arrow-left"></i> Kembali</a></li>
           </ol>
-          <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li><a href="../templates/2lecPilihTopik.html">Tambah Kuiz</a></li>
-            <li>Kuiz Sedia Ada</li>
-          </ol>
+         
         </div>
       </div>
     </section><!-- End Breadcrumbs Section -->
@@ -133,7 +129,7 @@
           </div>
 
           <div class="row" data-aos="fade-up" data-aos-delay="200">
-            <a href="../templates/2lecPilihTopik_TambahKuiz_form.html">
+            <a href="{{url_for('quiz_form')}}">
               <div class="activityBox viewKuiz">
                 <h5> <i class="bi-eye" style="padding: 10px;"></i>Tambah Soalan Kuiz</h5>
               </div>
@@ -158,14 +154,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <a href="#"><button class="btn btn-danger" style="margin: 10px;">Delete</button></a>
-                        <a href="#"><button class="btn btn-warning">Modify</button></a>
-                      </td>
-                      <td>[Soalan]</td>
-                      <td>[Jawapan]</td>
-                    </tr>
+                  {% for row in quiz %}
+                    {% if row[0] == "Perpuluhan" %}
+                      <tr>
+                        <td>
+                          <a href="{{ url_for('delete_quiz', soalan=row[1]) }}"><button class="btn btn-danger" style="margin: 10px;">Delete</button></a>
+                          <a href="{{ url_for('modify_quiz', soalan=row[1]) }}"><button class="btn btn-warning">Modify</button></a>
+                        </td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -186,14 +186,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <a href="#"><button class="btn btn-danger">Delete</button></a>
-                        <a href="#"><button class="btn btn-warning">Modify</button></a>
-                      </td>
-                      <td>[Soalan]</td>
-                      <td>[Jawapan]</td>
-                    </tr>
+                    {% for row in quiz %}
+                    {% if row[0] == "Tingkatan 3: Matematik Pengguna I" %}
+                      <tr>
+                        <td>
+                          <a href="{{ url_for('delete_quiz', soalan=row[1]) }}"><button class="btn btn-danger" style="margin: 10px;">Delete</button></a>
+                          <a href="{{ url_for('modify_quiz', soalan=row[1]) }}"><button class="btn btn-warning">Modify</button></a>
+                        </td>
+                        <td>{{row[1]}}</td>
+                        <td>{{row[2]}}</td>
+                      </tr>
+                    {% endif %}
+                  {% endfor %}
                   </tbody>
                 </table>
               </div>
@@ -214,14 +218,18 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>
-                        <a href="#"><button class="btn btn-danger">Delete</button></a>
-                        <a href="#"><button class="btn btn-warning">Modify</button></a>
-                      </td>
-                      <td>[Soalan]</td>
-                      <td>[Jawapan]</td>
-                    </tr>
+                    {% for row in quiz %}
+                      {% if row[0] == "Tingkatan 4: Matematik Pengguna II" %}
+                        <tr>
+                          <td>
+                            <a href="{{ url_for('delete_quiz', soalan=row[1]) }}"><button class="btn btn-danger" style="margin: 10px;">Delete</button></a>
+                            <a href="{{ url_for('modify_quiz', soalan=row[1]) }}"><button class="btn btn-warning">Modify</button></a>
+                          </td>
+                          <td>{{row[1]}}</td>
+                          <td>{{row[2]}}</td>
+                        </tr>
+                      {% endif %}
+                    {% endfor %}
                   </tbody>
                 </table>
               </div>

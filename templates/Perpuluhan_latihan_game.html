@@ -14,17 +14,56 @@
         <input type="text" class="typing-input" maxlength="1">
         <div class="inputs"></div>
         <div class="details">
-          <p class="hint">Hint: <span></span></p>
+          <p class="soalan">Soalan: <span></span></p> <!-- Updated here -->
+          <p class="hint" style="display: none;">Hint: <span></span></p>
           <p class="guess-left">Remaining guesses: <span></span></p>
           <p class="wrong-letter">Wrong letters: <span></span></p>
         </div>
+        <button class="button hint">Hint</button>
         <button class="btn retry">Sekali Lagi</button>
-        <a href="../templates/Perpuluhan_latihan_pilihJenis.html"> <button class="btn return">Kembali Website</button></a>
+        <a href="{{url_for('perpuluhan_latihan')}}"> <button class="btn return">Kembali Website</button></a>
       </div>
     </div>
 
-    <script src="../assets/js/LatihanGuessingWordList.js"></script>
-    <script src="../assets/js/LatihanGuessingWordScript.js"></script>
 
+    <script>
+      // Create a JavaScript array of word objects using data from the 'game' variable
+      let wordList = [
+        {% for game in game %}
+        {
+          word: "{{ game[0] }}",
+          soalan: "{{ game[1] }}",
+          hint: "{{ game[2] }}"
+        },
+        {% endfor %}
+      ];
+      let hintButtonClicks = 0;
+
+
+const hintButton = document.querySelector(".button.hint");
+const retryButton = document.querySelector(".btn.retry");
+hintButton.addEventListener("click", () => {
+  if (hintButtonClicks < 2) {
+    displayHint();
+  }
+  if (hintButtonClicks >= 2) {
+    hintButton.disabled = true;
+    hintButton.classList.add("greyed-button"); // Add the greyed-out style
+  }
+});
+function displayHint() {
+  const hintElement = document.querySelector(".hint");
+
+  hintElement.style.display = "block";
+
+  // Hide the hint after 10 seconds
+  setTimeout(() => {
+    hintElement.style.display = "none";
+  }, 10000);
+
+  hintButtonClicks++; // Increment hint button clicks
+}
+    </script>
+  <script src="../assets/js/LatihanGuessingWordScript.js"></script>
   </body>
 </html>

@@ -19,7 +19,6 @@
     rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap">
 
-
   <!-- Vendor CSS Files -->
   <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +27,7 @@
   <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
 
   <!-- Template Main CSS File -->
   <link href="../assets/css/style.css" rel="stylesheet">
@@ -39,8 +39,6 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-
-
 </head>
 
 <body>
@@ -48,7 +46,6 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
-
       <div class="logo">
         <h1><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
@@ -67,6 +64,7 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
+
     </div>
   </header><!-- End Header -->
 
@@ -77,14 +75,12 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="{{url_for('perpuluhan_nota')}}"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
             <li><a href="{% if role == 'Pelajar' %}{{ url_for('mainpage') }}{% else %}{{ url_for('lecpage') }}{% endif %}">Laman Utama</a></li>
             <li><a href="{% if role == 'Pelajar' %}{{ url_for('stdmaterial') }}{% else %}{{ url_for('materials') }}{% endif %}">Pemilihan Topik</a></li>
-            <li><a href="{{url_for('perpuluhan')}}">Perpuluhan</a></li>
-            <li><a href="{{url_for('perpuluhan_nota')}}">Nota</a></li>
-            <li>Nota Peta</li>
+            <li>Perpuluhan</li>
           </ol>
         </div>
       </div>
@@ -94,22 +90,49 @@
       <div class="container">
 
 
-        <!-- ======= Services Section ======= -->
-        <section id="services" class="services">
-          <div class="container">
 
+        <!-- ======= Features Section ======= -->
+        <section id="features" class="features">
+          <div class="container">
             <div class="section-title" data-aos="fade-up">
               <h1>NOMBOR PERPULUHAN</h1>
+              <hr>
             </div>
-            <div class="image-gallery">
-              {% for encoded_image in encoded_images %}
-                <div class="image-container">
-                  <img src="data:image/png;base64,{{ encoded_image }}" alt="Image">
-                </div>
-              {% endfor %}
-             </div>
+
+            <div class="row " data-aos="fade-up" data-aos-delay="300">
+              <div class="col-6 obj" >
+                <p><span>OBJEKTIF PEMBELAJARAN</span></p>
+                <p>Memahami nilai tempat ialah kedudukan digit dalam sesuatu nombor.<br><br>
+                  Membuat pengiraan yang melibatkan nilai tempat untuk sesuatu nombor.<br><br>
+                  Menjelaskan pengiraan yang melibatkan nilai tempat untuk sesuatu nombor.<br><br>
+                  Melengkapkan tugasan berkenaan dengan nilai tempat.<br><br>
+                  
+                </p>
+              </div>
+
+              <div class="col-6">
+                <a href="{{url_for('perpuluhan_nota')}}">
+                  <div class="icon-box BoxNota">
+                    <h3><i class="ri-bar-chart-box-line"></i> Nota</h3>
+                  </div>
+                </a>
+                
+                <a href="{{url_for('perpuluhan_latihan')}}">
+                  <div class="icon-box BoxLatihan">
+                    <h3> <i class="ri-bar-chart-box-line"></i> Latihan</h3>
+                  </div>
+                </a>
+
+                <a href="{{url_for('perpuluhan_kuiz')}}">
+                  <div class="icon-box BoxKuiz">
+                    <h3> <i class="ri-bar-chart-box-line"></i> Kuiz</h3>
+                  </div>
+                </a>
+              </div>
+            </div>
           </div>
-        </section><!-- End Services Section -->
+        </section><!-- End Features Section -->
+
 
 
 

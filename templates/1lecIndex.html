@@ -49,17 +49,17 @@
 
       <div class="logo">
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="../templates/1lecIndex.html"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>
+        <a href="{{url_for('lecpage')}}"><img src="../assets/img/logo.png" alt="" class="img-fluid"></a>
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li class="active"><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li><a href="../templates/2lecPilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li class="active"><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -80,7 +80,7 @@
               tetapi tentang memupuk pembelajaran." <br> </h5>
             <h8 data-aos="fade-up" data-aos-delay="400">- Paul Lockhart<br></h8>
             <div data-aos="fade-up" data-aos-delay="800">
-              <a href="../templates/2lecpilihTopik.html" class="btn-get-started scrollto">Jom Mulakan!</a>
+              <a href="{{url_for('materials')}}" class="btn-get-started scrollto">Jom Mulakan!</a>
             </div>
           </div>
         </div>
