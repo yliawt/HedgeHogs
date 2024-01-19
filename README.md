@@ -38,6 +38,7 @@ The current method to be used for developing the Silent Math Genius would be the
 In this section, the system has already been developed with all successful functionality. Both user types have been tailored with suitable interface and provide the flexibility to perform all activities within the system. The system also supports responsiveness, where the system is able to perform fluently and interactively in different window screen.
 
 <p><strong>Landing Page</strong></p>
+
 *Landing Interface*
 ![Prototype Screenshot](screenshot/land.png)
 
