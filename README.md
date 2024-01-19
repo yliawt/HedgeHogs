@@ -37,11 +37,66 @@ The current method to be used for developing the Silent Math Genius would be the
 ## Prototype
 In this section, the system has already been developed with all successful functionality. Both user types have been tailored with suitable interface and provide the flexibility to perform all activities within the system. The system also supports responsiveness, where the system is able to perform fluently and interactively in different window screen.
 
-![Prototype Screenshot](screenshot/signup.png)
-*Signup Interface*
+<p><strong>Landing Page</strong></p>
+*Landing Interface*
+![Prototype Screenshot](screenshot/land.png)
 
-![Prototype Screenshot](/path/to/screenshot2.png)
-*Caption for Screenshot 2*
+<p><strong>Sign Up and Log In Page</strong></p>
+
+*Sign Up Interface*
+![Prototype Screenshot](screenshot/signup.png)
+
+*Log In Interface*
+![Prototype Screenshot](screenshot/login.png)
+
+<p><strong>Home Page</strong></p>
+
+*HomePage Interface for Student*
+![Prototype Screenshot](screenshot/stu_main.png)
+
+*HomePage Interface for Instructor*
+![Prototype Screenshot](screenshot/lec_main.png)
+
+<p><strong>Profile Page</strong></p>
+
+*Profile Interface*
+![Prototype Screenshot](screenshot/profile.png)
+
+<p><strong>About Us Page</strong></p>
+
+*AboutUs Interface*
+![Prototype Screenshot](screenshot/question.png)
+
+<p><strong>Resource Page : Student View</strong></p>
+
+*Student: Topic View Interface*
+![Prototype Screenshot](screenshot/stu_pick.png)
+
+*Student: Topic Detail Interface*
+![Prototype Screenshot](screenshot/stu_topic.png)
+
+*Student: Note Type Interface*
+![Prototype Screenshot](screenshot/stu_notetype.png)
+
+*Student: Exercise Type Interface*
+![Prototype Screenshot](screenshot/stu_exetype.png)
+
+*Student: Game Interface*
+![Prototype Screenshot](screenshot/game.png)
+
+*Student: Quiz Interface*
+![Prototype Screenshot](screenshot/stu_quiz.png)
+
+<p><strong>Resource Page : Instructor View</strong></p>
+*Instructor: Add Activity*
+![Prototype Screenshot](screenshot/lec_add.png)
+<p><strong>Chat Page</strong></p>
+
+*Student: Chat Interface*
+![Prototype Screenshot](screenshot/stu_chat.png)
+
+*Instructor: Chat Interface*
+![Prototype Screenshot](screenshot/lec_chat.png)
 
 ## Acknowledgements
 This research received no specific grant from any funding agency in the public, commercial, or not-for-profit sectors.
