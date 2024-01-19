@@ -197,6 +197,9 @@ def profile():
     user_id = session.get("username")
     role = session.get("role")
     cur = mysql.connection.cursor()
+    cur.execute("SELECT password from users WHERE id = %s",(user_id,))
+    password = cur.fetchone()
+    print(password[0])
     cur.execute(
         "SELECT name, birth, gender, phone, email, school, address1, address2, poscode, negeri, huraian, photo FROM profile WHERE id=%s",
         (user_id,))
@@ -205,9 +208,9 @@ def profile():
 
     if photo:
         encoded_image = base64.b64encode(photo).decode("utf-8")
-        return render_template('4profile.html', info=info, photo=encoded_image, role=role)
+        return render_template('4profile.html', info=info, photo=encoded_image, role=role, password=password[0])
     else:
-        return render_template('4profile.html', info=info)
+        return render_template('4profile.html', info=info, password=password[0])
 
 
 @app.route('/about_us')
@@ -619,7 +622,8 @@ def modify_latihan():
     cur.execute("SELECT topic, category, filename, description FROM materials WHERE filename=%s",(filename,))
     nota=cur.fetchone()
     action="modify latihan"
-    return render_template('2lecPilihTopik_TambahLatihan_form.html', nota=nota, action=action)
+    category="Latihan"
+    return render_template('2lecPilihTopik_TambahLatihan_form.html', nota=nota, action=action, category=category)
 
 @app.route('/delete_latihan')
 def delete_latihan():
@@ -633,24 +637,24 @@ def delete_latihan():
 def modify_permainan():
     soalan = request.args.get('soalan')
     cur = mysql.connection.cursor()
-    cur.execute("SELECT topik, category, soalan, words, hint FROM permainan WHERE soalan=%s", (soalan,))
+    cur.execute("SELECT topik, soalan, words, hint FROM permainan WHERE soalan=%s", (soalan,))
     nota = cur.fetchone()
     action = "modify permainan"
-    return render_template('2lecPilihTopik_TambahLatihan_form.html', nota=nota, action=action)
+    category="Permainan"
+    return render_template('2lecPilihTopik_TambahLatihan_form.html', nota=nota, action=action,category=category)
 
 @app.route('/update_permainan', methods=['POST','GET'])
 def update_permainan():
     if request.method=="POST":
         name=request.args.get('name')
-        materials_type = request.form['type']
         topic = request.form['topic']
         words = request.form['perkataan']
         soalan = request.form['soalan']
         hint = request.form['hint']
         cur = mysql.connection.cursor()
         cur.execute(
-            "UPDATE permainan SET type=%s, topik=%s, words=%s, soalan=%s, hint=%s WHERE soalan=%s",
-            (materials_type, topic, words, soalan, hint, name))
+            "UPDATE permainan SET  topik=%s, words=%s, soalan=%s, hint=%s WHERE soalan=%s",
+            ( topic, words, soalan, hint, name))
         mysql.connection.commit()
     return redirect(url_for('upload_exercise'))
 
@@ -804,7 +808,6 @@ def insert():
         if "name" in request.form or "photo" in request.form:
             name = request.form["name"]
             photo = request.files["photo"]
-            print(name)
             if photo.filename=='':
                 cur.execute(
                     "UPDATE profile SET name=%s WHERE id = %s",
@@ -836,6 +839,7 @@ def insert():
                 (birth, gender, phone_no, email, school, baris1, baris2, poskod, negeri, user_id))
             mysql.connection.commit()
         cur.close()
+        print("here1")
         return redirect(url_for('mainpage'))
     return render_template("4profile.html")
 
@@ -936,6 +940,15 @@ def store_quiz_results():
 
     return jsonify(response_data), 200
 
+
+@app.route('/chgPass', methods=['POST'])
+def chgPass():
+    id = session['username']
+    new_password = request.form['newPassword']
+    cur = mysql.connection.cursor()
+    cur.execute("UPDATE users SET password = %s WHERE id = %s", (new_password, id))
+    mysql.connection.commit()
+    return redirect(url_for('profile'))
 
 if __name__ == '__main__':
     app.run(host='127.0.0.1', port=5000, debug=True)
