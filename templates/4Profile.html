@@ -5,12 +5,12 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Vesperr Bootstrap Template - Index</title>
+  <title>Silent Math Genius</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/logo.png" rel="icon">
   <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
@@ -137,11 +137,26 @@
                         </a>
                       </div>
                       <div class="d-flex">
-                        <a>
-                          <button type="submit" class="btn btn-primary" id="submitInventoryButton">Tukar Kata
-                            Laluan</button>
-                        </a>
+                          <a id="openPopupButton">
+                              <button type="button" class="btn btn-primary" id="changePasswordButton">Tukar Kata Laluan</button>
+                          </a>
                       </div>
+                      <div class="overlay" id="overlay"></div>
+                      <div class="popup-form" id="popupForm">
+                          <h2>Tukar Kata Laluan</h2>
+
+                              <label for="originalPassword">Kata Laluan dahulu:</label>
+                              <input type="password" id="originalPassword" ><br><br>
+
+                              <label for="newPassword">Kata Laluan Baharu:</label>
+                              <input type="password" name="password" id="newPassword"><br><br>
+
+                              <button type="button" id="submitPasswordButton">Hantar</button>
+
+                          <button id="closePopupButton" type="reset">Tutup</button>
+                      </div>
+
+
                     </form>
 
 
@@ -274,13 +289,6 @@
     });
   </script>
 
-  <!-- Display Add Cancelled -->
-  <script>
-    document.getElementById('cancelInventoryButton').addEventListener('click', function () {
-      event.preventDefault(); // Prevent the form from submitting for demo purposes
-      alert('Maklumat tidak dikemaskini. Sila cuba sekali lagi');
-    });
-  </script>
 <script>
     document.getElementById('fileToUpload').addEventListener('change', function(e) {
       const profilePic = document.getElementById('profilePic');
@@ -296,6 +304,78 @@
       }
     });
   </script>
+<script>
+    // Get the stored password from the template (make sure it's properly set in your Python code)
+    const storedPassword = "{{ password }}";
+
+    // Event listeners
+    const openPopupButton = document.getElementById("openPopupButton");
+    const closePopupButton = document.getElementById("closePopupButton");
+    const overlay = document.getElementById("overlay");
+    const popupForm = document.getElementById("popupForm");
+    const originalPasswordInput = document.getElementById("originalPassword");
+    const newPasswordInput = document.getElementById("newPassword");
+
+    openPopupButton.addEventListener("click", () => {
+        overlay.style.display = "block";
+        popupForm.style.display = "block";
+        originalPasswordInput.setAttribute("required", "");
+        newPasswordInput.setAttribute("required", "");
+    });
+
+    closePopupButton.addEventListener("click", () => {
+        overlay.style.display = "none";
+        popupForm.style.display = "none";
+    });
+
+    // Event listener for form submission
+    document.getElementById('submitPasswordButton').addEventListener('click', function () {
+      const enteredOriginalPassword = originalPasswordInput.value;
+      const newPassword = newPasswordInput.value; // Get the new password
+
+      if (enteredOriginalPassword === storedPassword) {
+          // Create a FormData object to hold your data
+          const formData = new FormData();
+          formData.append('newPassword', newPassword); // Include the new password
+
+          // Create an XMLHttpRequest object
+          const xhr = new XMLHttpRequest();
+
+          // Configure the POST request
+          xhr.open('POST', '/chgPass', true);
+
+          // Set up a callback function to handle the response
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                  if (xhr.status === 200) {
+                      // Handle the response here, if needed
+                    alert('Kata Laluan Telah DikemasKinikan.')
+                  } else {
+                      // Handle errors here
+                      alert('POST request failed with status ' + xhr.status);
+                  }
+              }
+          };
+
+          // Send the POST request with the FormData
+          xhr.send(formData);
+      } else {
+          alert("Kata Laluan Dahulu Adalah TIDAK Betul. Sila Cuba Satu Kali Lagi.");
+      }
+
+      // Reset the form inputs (for demonstration purposes)
+      originalPasswordInput.value = "";
+      newPasswordInput.value = "";
+
+      // Close the popup
+      overlay.style.display = "none";
+      popupForm.style.display = "none";
+    });
+
+
+</script>
+
+
 </body>
 
 </html>

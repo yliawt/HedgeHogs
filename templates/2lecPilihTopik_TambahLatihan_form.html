@@ -46,19 +46,19 @@
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center justify-content-between">
       <div class="logo">
-        <h1><a href="../templates/1lecIndex.html">Silent Math Genius</a></h1>
+        <h1><a href="{{url_for('lecpage')}}">Silent Math Genius</a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-          <li class="active"><a href="../templates/2lecPilihTopik.html">Bahan Pembelajaran</a></li>
-          <li><a href="../templates/3ChatBox.html">Chatbox</a></li>
-          <li><a href="../templates/4Profile.html">Profil</a></li>
-          <li><a href="../templates/5AboutUs.html">Mengenai Kita</a></li>
-          <li><a href="../templates/000main.html">Log Keluar</a></li>
+          <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+          <li class="active"><a href="{{url_for('materials')}}">Bahan Pembelajaran</a></li>
+          <li><a href="{{url_for('lecchatbox')}}">Chatbox</a></li>
+          <li><a href="{{url_for('profile')}}">Profil</a></li>
+          <li><a href="{{url_for('about_us')}}">Mengenai Kita</a></li>
+          <li><a href="{{url_for('logout')}}">Log Keluar</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -71,12 +71,12 @@
       <div class="container">
         <div class="d-flex justify-content-between align-items-center">
           <ol>
-            <li><a href="../templates/2lecPilihTopik_TambahLatihan.html"><i class="bi bi-arrow-left"></i></a></li>
+            <li><a href="{{url_for('upload_exercise')}}"><i class="bi bi-arrow-left"></i></a></li>
           </ol>
           <ol>
-            <li><a href="../templates/1lecIndex.html">Laman Utama</a></li>
-            <li><a href="../templates/2lecPilihTopik.html">Tambah Latihan</a></li>
-            <li><a href="../templates/2lecPilihTopik_TambahLatihan.html">Latihan Sedia Ada</a></li>
+            <li><a href="{{url_for('lecpage')}}">Laman Utama</a></li>
+            <li><a href="{{url_for('materials')}}">Categori</a></li>
+            <li><a href="{{url_for('upload_exercise')}}">Latihan Sedia Ada</a></li>
             <li>Laman Tambah Latihan</li>
           </ol>
         </div>
@@ -90,7 +90,8 @@
         <section id="portfolio" class="portfolio">
 
           <div class="section-title" data-aos="fade-up">
-            {% if action == 'modify' %}
+            {% if action == 'modify latihan' or action == 'modify permainan'%}
+
               <h1>Kemas Kini Latihan</h1>
             {% else %}
               <h1>Tambah Latihan</h1>
@@ -101,7 +102,7 @@
               <div class="col-lg-12 d-flex align-items-stretch">
                 <div class="card w-100">
                   <div class="card-body p-4">
-                    <form action="{% if action == 'modify latihan' %}{{ url_for('modify_materials', name=nota[2]) }}{% elif action == 'modify permainan' %}{{ url_for('update_permainan', name=nota[2]) }}{% else %}{{ url_for('upload_materials') }}{% endif %}" method="POST" enctype="multipart/form-data">
+                    <form action="{% if action == 'modify latihan' %}{{ url_for('modify_materials', name=nota[2]) }}{% elif action == 'modify permainan' %}{{ url_for('update_permainan', name=nota[1]) }}{% else %}{{ url_for('upload_materials') }}{% endif %}" method="POST" enctype="multipart/form-data">
                       <input type="hidden" name="type" value="latihan">
                       <div class="mb-3 row">
                         <div class="col-6">
@@ -117,8 +118,8 @@
                         <div class="col-6">
                           <label for="revenuetype" class="form-label">Jenis</label>
                           <select id="category" class="form-select" name="category" type="text" required>
-                            <option {% if nota[1] == 'Latihan' %}selected{% endif %}>Latihan</option>
-                            <option {% if nota[1] == 'Permainan' %}selected{% endif %}>Permainan</option>
+                            <option {% if category == 'Latihan' %}selected{% endif %}>Latihan</option>
+                            <option {% if category == 'Permainan' %}selected{% endif %}>Permainan</option>
                           </select>
                         </div>
                       </div>
@@ -137,17 +138,17 @@
 
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="perkataan" class="form-label">Perkataan</label>
-                        <input type="text" class="form-control" name="perkataan" id="perkataan" value="{{ nota[3] if nota[3] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan perkataan untuk soalan.')" oninput="this.setCustomValidity('')">
+                        <input type="text" class="form-control" name="perkataan" id="perkataan" value="{{ nota[2] if nota[2] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan perkataan untuk soalan.')" oninput="this.setCustomValidity('')">
 
                       </div>
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="soalan" class="form-label">Soalan</label>
-                        <input type="text" class="form-control" name="soalan" id="soalan" value="{{ nota[2] if nota[2] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan soalan.')" oninput="this.setCustomValidity('')">
+                        <input type="text" class="form-control" name="soalan" id="soalan" value="{{ nota[1] if nota[1] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan soalan.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="mb-3 permainan-fields" style="display: none;">
                         <label for="hint" class="form-label">Hint</label>
-                        <input type="text" class="form-control" name="hint" id="hint" value="{{ nota[4] if nota[4] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan hint untuk soalan.')" oninput="this.setCustomValidity('')">
+                        <input type="text" class="form-control" name="hint" id="hint" value="{{ nota[3] if nota[3] is not none else '' }}" required oninvalid="this.setCustomValidity('Sila masukkan hint untuk soalan.')" oninput="this.setCustomValidity('')">
                       </div>
 
                       <div class="d-flex justify-content-center">
@@ -256,7 +257,11 @@
                       return true; // Allow form submission if everything is valid.
                     }
                     </script>
-
+                    <script>
+                      document.getElementById('cancelInventoryButton').addEventListener('click', function () {
+                        window.location.href = '/upload_exercise';
+                      });
+                    </script>
                   </div>
                 </div>
               </div>
