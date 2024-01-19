@@ -88,8 +88,10 @@ In this section, the system has already been developed with all successful funct
 ![Prototype Screenshot](screenshot/stu_quiz.png)
 
 <p><strong>Resource Page : Instructor View</strong></p>
+
 *Instructor: Add Activity*
 ![Prototype Screenshot](screenshot/lec_add.png)
+
 <p><strong>Chat Page</strong></p>
 
 *Student: Chat Interface*
